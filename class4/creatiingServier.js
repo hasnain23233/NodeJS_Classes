@@ -1,6 +1,6 @@
 //In this class we learn the create a server on node js and also we learn the request and response form server
 
-// first creating a server
+//creating a server
 
 const HTTP = require('http')
 HTTP.createServer((req, res) => {
