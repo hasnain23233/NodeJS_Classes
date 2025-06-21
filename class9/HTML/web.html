@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>How to Send HTML to a Server</title>
+  
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f4f6f8;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #005b96;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 30px auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    }
+
+    h2 {
+      color: #005b96;
+    }
+
+    ul {
+      margin-left: 20px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      background: #eee;
+      font-size: 14px;
+    }
+
+    code {
+      background: #e0e0e0;
+      padding: 3px 6px;
+      border-radius: 4px;
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Sending an HTML File to a Server</h1>
+  </header>
+
+  <div class="container">
+    <h2>📤 How to Send an HTML File to a Server</h2>
+    <p>There are multiple ways to send or upload your HTML file to a server. Below are some common methods used by developers:</p>
+
+    <h3>1. Using FTP (File Transfer Protocol)</h3>
+    <ul>
+      <li>Install an FTP client like <strong>FileZilla</strong>.</li>
+      <li>Connect using your server's credentials (host, username, password).</li>
+      <li>Drag and drop your HTML file into the <code>public_html</code> or relevant directory.</li>
+    </ul>
+
+    <h3>2. Using cPanel File Manager</h3>
+    <ul>
+      <li>Login to your hosting's cPanel dashboard.</li>
+      <li>Open <strong>File Manager</strong> and navigate to <code>public_html</code>.</li>
+      <li>Click <strong>Upload</strong> and choose your HTML file.</li>
+    </ul>
+
+    <h3>3. Using Node.js or Express Server</h3>
+    <p>If you're using a Node.js server, you can serve an HTML file like this:</p>
+    <pre><code>
+const http = require('http');
+const fs = require('fs');
+
+http.createServer((req, res) => {
+  fs.readFile('index.html', function(err, data) {
+    res.writeHead(200, {'Content-Type': 'text/html'});
+    res.write(data);
+    res.end();
+  });
+}).listen(3000);
+    </code></pre>
+
+    <h3>4. GitHub + Hosting Service</h3>
+    <ul>
+      <li>Push your HTML file to a GitHub repository.</li>
+      <li>Connect GitHub to services like <strong>Netlify</strong> or <strong>Vercel</strong>.</li>
+      <li>Deploy your site instantly.</li>
+    </ul>
+  </div>
+
+  <footer>
+    &copy; 2025 WebGuide Pro. All rights reserved.
+  </footer>
+</body>
+</html>
