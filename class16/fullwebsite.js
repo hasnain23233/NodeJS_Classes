@@ -42,6 +42,7 @@ const server = http.createServer((req, res) => {
     }
     else if (req.url === '/submit' && req.method === 'POST') {
         contact(req, res);
+
     }
 })
 server.listen(3200, () => {
