@@ -1,6 +1,8 @@
 //In this folder we make airbnd full beckend project using express.js and node js
 const express = require('express')
 const bodyParser = require('body-parser')
+const fs = require('fs')
+const path = require('path')
 const userRoute = require('./routes/user/app')
 const hostRoute = require('./routes/host/hostRout')
 
@@ -17,7 +19,8 @@ app.use(userRoute)
 app.use('/host/', hostRoute)
 
 app.use((req, res, next) => {
-    res.status(404).send('<h1>Oops! Your page was not found</h1>')
+
+    res.status(404).sendFile(path.join(__dirname, '/views/', '404.html'))
 })
 
 
