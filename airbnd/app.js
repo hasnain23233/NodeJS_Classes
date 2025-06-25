@@ -14,9 +14,11 @@ app.use('/', (req, res, next) => {
 app.use(bodyParser.urlencoded())
 
 app.use(userRoute)
-app.use(hostRoute)
+app.use('/host/', hostRoute)
 
-
+app.use((req, res, next) => {
+    res.status(404).send('<h1>Oops! Your page was not found</h1>')
+})
 
 
 

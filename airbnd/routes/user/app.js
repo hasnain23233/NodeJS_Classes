@@ -5,7 +5,7 @@ router.get('/', (req, res, next) => {
     console.log('home page')
     res.send(`
         <h1>Welcome to airbnd web clond</h1>
-        <a href="/add_home" >Add home</a>
+        <a href="/host/add_home" >Add home</a>
         `)
 })
 
