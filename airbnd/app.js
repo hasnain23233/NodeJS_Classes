@@ -5,6 +5,7 @@ const fs = require('fs')
 const path = require('path')
 const userRoute = require('./routes/user/app')
 const hostRoute = require('./routes/host/hostRout')
+const rootDirector = require('./utility/pathUtils')
 
 
 const app = express()
@@ -15,12 +16,13 @@ app.use('/', (req, res, next) => {
 })
 app.use(bodyParser.urlencoded())
 
+
 app.use(userRoute)
 app.use('/host/', hostRoute)
 
 app.use((req, res, next) => {
 
-    res.status(404).sendFile(path.join(__dirname, '/views/', '404.html'))
+    res.status(404).sendFile(path.join(rootDirector, '/views/', '404.html'))
 })
 
 

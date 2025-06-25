@@ -3,10 +3,11 @@ const path = require('path')
 
 const fs = require('fs')
 const hostRoute = express.Router()
+const rootDirector = require('../../utility/pathUtils')
 
 hostRoute.get('/add_home', (req, res, next) => {
     console.log('add home page ')
-    res.sendFile(path.join(__dirname, '../../views/', 'add_home.html'))
+    res.sendFile(path.join(rootDirector, '/views/', 'add_home.html'))
 })
 hostRoute.post('/add_home', (req, res, next) => {
     res.send(`
