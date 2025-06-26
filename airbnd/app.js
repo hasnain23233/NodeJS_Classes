@@ -6,9 +6,12 @@ const path = require('path')
 const userRoute = require('./routes/user/app')
 const hostRoute = require('./routes/host/hostRout')
 const rootDirector = require('./utility/pathUtils')
+const pathUtils = require('./utility/pathUtils')
 
 
 const app = express()
+
+app.use(express.static(path.join(pathUtils, 'public')))
 
 app.use('/', (req, res, next) => {
     console.log(req.url, req.method)
@@ -21,7 +24,6 @@ app.use(userRoute)
 app.use('/host/', hostRoute)
 
 app.use((req, res, next) => {
-
     res.status(404).sendFile(path.join(rootDirector, '/views/', '404.html'))
 })
 
