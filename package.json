@@ -1,6 +1,11 @@
 {
+  "scripts": {
+    "tailwind": "npx tailwindcss -i class20/views/input.css -o class20/public/output.css --watch",
+    "start": "npm run tailwind"
+  },
   "dependencies": {
     "body-parser": "^2.2.0",
+    "ejs": "^3.1.10",
     "express": "^5.1.0"
   },
   "devDependencies": {

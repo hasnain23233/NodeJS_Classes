@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./airbnd/views/**/*.html'],
+  content: ['./class20/views/*.html'],
   theme: {
     extend: {},
   },
