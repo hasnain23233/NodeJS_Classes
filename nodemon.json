@@ -1,0 +1,7 @@
+{
+    "watch": ["."],
+    "ext": "js,json,ejs",
+    "ignore": ["node_modules", "class21/HomeData/"],
+    "exec": "node ./class21/app.js"
+  }
+  
