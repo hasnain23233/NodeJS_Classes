@@ -1,11 +1,7 @@
 const express = require('express')
 const router = express.Router()
-const { HomeData } = require('../host/hostRout')
+const { getHomeList } = require('../../controllers/homes')
 
-router.get('/', (req, res, next) => {
-    console.log(HomeData)
-    res.render('home_page', { HomeData })
-
-})
+router.get('/', getHomeList)
 
 module.exports = router
