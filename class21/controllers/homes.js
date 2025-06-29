@@ -26,7 +26,5 @@ exports.postAddHome = (req, res, next) => {
     res.render('Success', { sucessReqister: sucessReqister })
 }
 exports.getHomeList = (req, res, next) => {
-    console.log(HomeData)
     res.render('home_page', { HomeData })
-
 }

@@ -2,11 +2,11 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const fs = require('fs')
-const path = require('path')
 const userRoute = require('./routes/user/app')
 const { hostRoute } = require('./routes/host/hostRout')
-const rootDirector = require('./utility/pathUtils')
 const pathUtils = require('./utility/pathUtils')
+const Error = require('./controllers/Error')
+const path = require('path')
 
 
 const app = express()
@@ -26,9 +26,7 @@ app.use(bodyParser.urlencoded())
 app.use(userRoute)
 app.use(hostRoute)
 
-app.use((req, res, next) => {
-    res.status(404).sendFile(path.join(rootDirector, '/views/', '404.html'))
-})
+app.use(Error.getEror404)
 
 
 
