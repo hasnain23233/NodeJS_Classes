@@ -1,16 +1,11 @@
 const express = require('express')
-const path = require('path')
-
 const fs = require('fs')
 const hostRoute = express.Router()
-const rootDirector = require('../../utility/pathUtils')
+const homesController = require('./../../controllers/homes')
 
 const HomeData = []
 
-hostRoute.get('/add_home', (req, res, next) => {
-  console.log('add home page ')
-  res.render('add_home', { HomeData })
-})
+hostRoute.get('/add_home', homesController.getsHome)
 hostRoute.post('/add_home', (req, res, next) => {
   const content = `name: ${req.body.name} . Email is ${req.body.email} and your house is ${req.body.home} `
   HomeData.push({
