@@ -1,7 +1,6 @@
 //In this folder we make airbnd full beckend project using express.js and node js
 const express = require('express')
 const bodyParser = require('body-parser')
-const fs = require('fs')
 const userRoute = require('./routes/user/app')
 const { hostRoute } = require('./routes/host/hostRout')
 const pathUtils = require('./utility/pathUtils')

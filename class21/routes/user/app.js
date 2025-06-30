@@ -1,7 +1,10 @@
 const express = require('express')
-const router = express.Router()
-const { getHomeList } = require('../../controllers/homes')
+const storerouter = express.Router()
+const { getHomeList, getBooking, getfavourites, getInder } = require('../../controllers/storeController')
 
-router.get('/', getHomeList)
+storerouter.get('/', getInder)
+storerouter.get('/homes', getHomeList)
+storerouter.get('/booking', getBooking)
+storerouter.get('/favourites', getfavourites)
 
-module.exports = router
+module.exports = storerouter
