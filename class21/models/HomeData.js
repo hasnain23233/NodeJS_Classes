@@ -12,16 +12,18 @@ module.exports = class HomeData {
         return `name: ${this.name} . Email is ${this.email} and your house is ${this.home} `
     }
     save() {
-
-        HomeRegisterData.push(this)
-        fs.writeFile(`class21/HomeData/Home.json`, JSON.stringify(HomeRegisterData), (err, data) => {
-            if (err) {
-                console.log('Interval Server is Error')
-            }
-            else {
-                console.log('Your data was save')
-            }
+        HomeData.fetchingAll(HomeRegisterData => {
+            HomeRegisterData.push(this)
+            fs.writeFile(`class21/HomeData/Home.json`, JSON.stringify(HomeRegisterData), (err, data) => {
+                if (err) {
+                    console.log('Interval Server is Error')
+                }
+                else {
+                    console.log('Your data was save')
+                }
+            })
         })
+
     }
     static fetchingAll(callback) {
         fs.readFile(`class21/HomeData/Home.json`, (err, data) => {
