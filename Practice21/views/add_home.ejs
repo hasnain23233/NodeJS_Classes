@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Register Home</title>
+  <link rel="stylesheet" href="output.css" />
+</head>
+<body>
+  <%- include('./components/Header.ejs') %>
+
+  <div  class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+      <h1 class="text-2xl font-bold text-gray-800 mb-6 text-center">
+        Register Your Home
+      </h1>
+  
+      <form action="/add_home" method="post" class="space-y-4">
+        <!-- Name Field -->
+        <div>
+          <label for="name" class="block text-sm font-medium text-gray-700">Name</label>
+          <input type="text" id="name" name="name" placeholder="Enter your name" required
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"/>
+        </div>
+  
+        <!-- Email Field -->
+        <div>
+          <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+          <input type="email" id="email" name="email" placeholder="Enter your email" required
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"/>
+        </div>
+  
+        <!-- Home Name Field -->
+        <div>
+          <label for="home" class="block text-sm font-medium text-gray-700">Home</label>
+          <input type="text" id="home" name="home" placeholder="Enter your home name" required
+            class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"/>
+        </div>
+       <!-- Home Name Field -->
+       <div>
+        <label for="img" class="block text-sm font-medium text-gray-700">Home Img</label>
+        <input type="text" id="img" name="img" placeholder="send you image link input" required
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"/>
+      </div>
+        <!-- Submit Button -->
+        <div class="text-center">
+          <button type="submit"
+            class="w-full bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-300">
+            Submit
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+
+</body>
+</html>
