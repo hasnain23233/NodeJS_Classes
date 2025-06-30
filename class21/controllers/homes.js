@@ -1,8 +1,7 @@
-const HomeData = require('../models/HomeData')
 const RegiesterHome = require('../models/HomeData')
 
 exports.getsHome = (req, res, next) => {
-    res.render('add_home')
+    res.render('host/add_home')
 }
 
 exports.postAddHome = (req, res, next) => {
@@ -14,10 +13,10 @@ exports.postAddHome = (req, res, next) => {
         email: req.body.email,
         home: req.body.home,
     }
-    res.render('Success', { sucessReqister: sucessReqister })
+    res.render('host/Success', { sucessReqister: sucessReqister })
 }
 exports.getHomeList = (req, res, next) => {
     RegiesterHome.fetchingAll((data) => {
-        res.render('home_page', { HomeData: data })
+        res.render('store/homeList', { HomeData: data })
     })
 }
