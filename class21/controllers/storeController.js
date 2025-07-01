@@ -14,6 +14,10 @@ exports.getfavourites = (req, res, next) => {
         res.render('store/favourites', { HomeData: data })
     })
 }
+exports.postAddFvt = (req, res, next) => {
+    console.log("Come to add to favourites", req.body)
+    res.redirect('/favourites')
+}
 exports.getInder = (req, res, next) => {
     RegiesterHome.fetchingAll((data) => {
         res.render('store/index', { HomeData: data })

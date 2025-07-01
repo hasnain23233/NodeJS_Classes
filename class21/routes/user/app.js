@@ -8,4 +8,6 @@ storerouter.get('/booking', userController.getBooking)
 storerouter.get('/favourites', userController.getfavourites)
 storerouter.get('/homes-list/:homeId', userController.getHomeDetails)
 
+storerouter.post('/favourites', userController.postAddFvt)
+
 module.exports = storerouter
