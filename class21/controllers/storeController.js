@@ -19,3 +19,16 @@ exports.getInder = (req, res, next) => {
         res.render('store/index', { HomeData: data })
     })
 }
+exports.getHomeDetails = (req, res, next) => {
+    const homeId = req.params.homeId
+
+    RegiesterHome.findById(homeId, home => {
+        if (!home) {
+            console.log('home not found')
+            res.redirect('/homes')
+        } else {
+
+            res.render('store/homeDetails', { homeDetail: home })
+        }
+    })
+}
