@@ -1,3 +1,4 @@
+const favourites = require('../models/favourites')
 const RegiesterHome = require('../models/HomeData')
 
 
@@ -9,15 +10,28 @@ exports.getHomeList = (req, res, next) => {
 exports.getBooking = (req, res, next) => {
     res.render('store/booking')
 }
+
 exports.getfavourites = (req, res, next) => {
-    RegiesterHome.fetchingAll((data) => {
-        res.render('store/favourites', { HomeData: data })
+    favourites.getToFvt(favIds => {
+        RegiesterHome.fetchingAll((homes) => {
+            const cleanFavIds = favIds.map(id => String(id).trim());
+            const fvtHomes = homes.filter(home => cleanFavIds.includes(String(home.id).trim()));
+            res.render('store/favourites', { fvtHomes: fvtHomes });
+        });
+    });
+};
+
+
+
+exports.postAddFvt = (req, res, next) => {
+    favourites.addToFvt(req.body.id, error => {
+        if (error) {
+            console.log('error while marking', error)
+        }
+        res.redirect('/favourites')
     })
 }
-exports.postAddFvt = (req, res, next) => {
-    console.log("Come to add to favourites", req.body)
-    res.redirect('/favourites')
-}
+
 exports.getInder = (req, res, next) => {
     RegiesterHome.fetchingAll((data) => {
         res.render('store/index', { HomeData: data })
