@@ -1,8 +1,6 @@
-
 const HomeData = require('../Models/HomeData')
-
 exports.getAddHome = (req, res, next) => {
-    res.render('add_home')
+    res.render('host/add_home')
 }
 exports.postAddHome = (req, res, next) => {
     console.log(req.body.name, req.body.email, req.body.home)
@@ -15,11 +13,10 @@ exports.postAddHome = (req, res, next) => {
         home: req.body.home,
         img: req.body.img
     }
-    res.render('Success', { sucessReqister: sucessReqister })
+    res.render('host/Success', { sucessReqister: sucessReqister })
 }
-
-exports.getHomePage = (req, res, next) => {
+exports.getHostHomeList = (req, res, next) => {
     HomeData.fetchingData((data) => {
-        res.render('home_page', { HomeData: data })
+        res.render('host/adminHomeList', { HomeData: data })
     })
 }
