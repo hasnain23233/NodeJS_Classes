@@ -1,6 +1,9 @@
 const RegiesterHome = require('../models/HomeData')
 exports.getsHome = (req, res, next) => {
-    res.render('host/editHome', { title: "Register Your Home" })
+    res.render('host/editHome', {
+        title: "Register Your Home",
+        editing: false,
+    })
 }
 
 exports.postAddHome = (req, res, next) => {
@@ -26,14 +29,14 @@ exports.getEditHome = (req, res, next) => {
 
     RegiesterHome.findById(homeId, home => {
         if (!home) {
-            console.log('Your home is not found for editing')
+            console.log('sorry your home page was not found!!')
             return res.redirect('/host_home_List')
-            res.render('host/editHome', {
-                queryEditing: queryEditing,
-                title: "Edit Your Home"
-            })
         }
+        console.log(homeId, queryEditing, home)
+        res.render('host/editHome', {
+            home: home,
+            editing: queryEditing,
+            title: "Edit Your Home"
+        })
     })
-
-
 }
