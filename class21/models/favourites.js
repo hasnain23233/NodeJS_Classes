@@ -21,6 +21,5 @@ module.exports = class favourites {
                 callback([])
             }
         })
-
     }
 }

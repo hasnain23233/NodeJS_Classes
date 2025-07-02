@@ -1,5 +1,4 @@
 const fs = require('fs')
-const RegisterHome = []
 module.exports = class RegistrationHome {
     constructor(name, email, home, img) {
         this.name = name
@@ -9,6 +8,7 @@ module.exports = class RegistrationHome {
     }
 
     save() {
+        this.id = Math.random().toString()
         RegistrationHome.fetchingData(RegisterHome => {
             RegisterHome.push(this)
             fs.writeFile('Practice21/HomeData/homes.json', JSON.stringify(RegisterHome), (err, data) => {
@@ -29,6 +29,13 @@ module.exports = class RegistrationHome {
             } else {
                 callback([])
             }
+        })
+    }
+
+    static findbyId(homeId, callback) {
+        this.fetchingData(home => {
+            const homeData = home.find(home => home.id === homeId)
+            callback(homeData)
         })
     }
 }

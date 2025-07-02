@@ -9,4 +9,7 @@ router.get('/favourites', UserStoreController.getFvtList)
 router.get('/homes', UserStoreController.getHomeList)
 router.get('/reserve', UserStoreController.getResverList)
 
+router.get('/home/:homeId', UserStoreController.getHomeDetails)
+router.post('/favourites', UserStoreController.postFvtList)
+
 module.exports = router
