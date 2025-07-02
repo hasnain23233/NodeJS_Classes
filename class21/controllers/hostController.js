@@ -6,23 +6,7 @@ exports.getsHome = (req, res, next) => {
     })
 }
 
-exports.postAddHome = (req, res, next) => {
-    const { name, email, home, img } = req.body
-    const Homedata = new RegiesterHome(name, email, home, img)
-    Homedata.save()
-    const sucessReqister = {
-        name: req.body.name,
-        email: req.body.email,
-        home: req.body.home,
-    }
-    res.render('host/Success', { sucessReqister: sucessReqister })
-}
 
-exports.gethostHomeList = (req, res, next) => {
-    RegiesterHome.fetchingAll((data) => {
-        res.render('host/hostHomeList', { HomeData: data })
-    })
-}
 exports.getEditHome = (req, res, next) => {
     const homeId = req.params.homeId
     const queryEditing = req.query.editing === 'true'
@@ -40,3 +24,30 @@ exports.getEditHome = (req, res, next) => {
         })
     })
 }
+
+exports.gethostHomeList = (req, res, next) => {
+    RegiesterHome.fetchingAll((data) => {
+        res.render('host/hostHomeList', { HomeData: data })
+    })
+}
+
+exports.postAddHome = (req, res, next) => {
+    const { name, email, home, img } = req.body
+    const Homedata = new RegiesterHome(name, email, home, img)
+    Homedata.save()
+    const sucessReqister = {
+        name: req.body.name,
+        email: req.body.email,
+        home: req.body.home,
+    }
+    res.render('host/Success', { sucessReqister: sucessReqister })
+}
+
+
+exports.postEditHome = (req, res, next) => {
+    const { id, name, email, home, img } = req.body
+    const Homedata = new RegiesterHome(id, name, email, home, img)
+    Homedata.save()
+    res.redirect('/host_home_List')
+}
+
