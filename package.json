@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "tailwind": "npx tailwindcss -i Practice21/views/input.css -o Practice21/public/output.css --watch",
+    "tailwind": "npx tailwindcss -i class21/views/input.css -o class21/public/output.css --watch",
     "start": "npm run tailwind"
   },
   "dependencies": {
