@@ -31,23 +31,32 @@ exports.gethostHomeList = (req, res, next) => {
     })
 }
 
+// Add New Home
 exports.postAddHome = (req, res, next) => {
-    const { name, email, home, img } = req.body
-    const Homedata = new RegiesterHome(name, email, home, img)
-    Homedata.save()
-    const sucessReqister = {
-        name: req.body.name,
-        email: req.body.email,
-        home: req.body.home,
-    }
-    res.render('host/Success', { sucessReqister: sucessReqister })
-}
+    const { name, email, home, img } = req.body;
+    const Homedata = new RegiesterHome(null, name, email, home, img); // ✅ Fix here
+    Homedata.save();
+    const sucessReqister = { name, email, home };
+    res.render('host/Success', { sucessReqister });
+};
 
-
+// Edit Existing Home
 exports.postEditHome = (req, res, next) => {
-    const { id, name, email, home, img } = req.body
-    const Homedata = new RegiesterHome(id, name, email, home, img)
-    Homedata.save()
-    res.redirect('/host_home_List')
+    const { id, name, email, home, img } = req.body;
+    const Homedata = new RegiesterHome(id, name, email, home, img); // ✅ Fix here
+    Homedata.save();
+    res.redirect('/host_home_List');
+};
+
+exports.postDeleteHome = (req, res, next) => {
+    const homeId = req.params.homeId
+    console.log("You are deleting home ", homeId)
+    RegiesterHome.deleteById(homeId, err => {
+        if (err) {
+            console.log('error while deleting', err)
+        }
+        res.redirect('/host_home_List')
+    })
 }
+
 

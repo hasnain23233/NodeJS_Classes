@@ -32,6 +32,17 @@ exports.postAddFvt = (req, res, next) => {
     })
 }
 
+exports.postRemoveForFavroit = (req, res, next) => {
+    const homeId = req.params.homeId
+    favourites.deleteById(homeId, err => {
+        if (err) {
+            console.log("Error while removing from favourites page", err)
+        }
+        res.redirect('/favourites')
+    })
+}
+
+
 exports.getInder = (req, res, next) => {
     RegiesterHome.fetchingAll((data) => {
         res.render('store/index', { HomeData: data })

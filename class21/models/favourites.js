@@ -22,4 +22,12 @@ module.exports = class favourites {
             }
         })
     }
+    static deleteById(delHomeId, callback) {
+        favourites.getToFvt(homesIds => {
+            const homeDeleteIds = homesIds.filter(homeId => String(homeId).trim() !== String(delHomeId).trim());
+            fs.writeFile('class21/HomeData/fvtHome.json', JSON.stringify(homeDeleteIds), callback);
+        });
+    }
+
+
 }

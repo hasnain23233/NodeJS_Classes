@@ -9,6 +9,7 @@ hostRoute.get('/host_home_List', homesController.gethostHomeList)
 
 hostRoute.get('/host/edit-home/:homeId', homesController.getEditHome)
 hostRoute.post('/host/edit-home', homesController.postEditHome)
+hostRoute.post('/host/delete-home/:homeId', homesController.postDeleteHome)
 
 
 

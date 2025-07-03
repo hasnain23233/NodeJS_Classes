@@ -9,5 +9,6 @@ storerouter.get('/favourites', userController.getfavourites)
 storerouter.get('/homes-list/:homeId', userController.getHomeDetails)
 
 storerouter.post('/favourites', userController.postAddFvt)
+storerouter.post('/favourites/delete/:homeId', userController.postRemoveForFavroit)
 
 module.exports = storerouter

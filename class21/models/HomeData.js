@@ -1,4 +1,5 @@
-const fs = require('fs')
+const fs = require('fs');
+const favourites = require('./favourites');
 
 module.exports = class HomeData {
     constructor(id, name, email, home, img) {
@@ -9,6 +10,7 @@ module.exports = class HomeData {
         this.img = img;
     }
 
+
     save() {
         HomeData.fetchingAll(allHomes => {
             if (this.id) {
@@ -17,9 +19,14 @@ module.exports = class HomeData {
                 this.id = Math.random().toString();
                 allHomes.push(this);
             }
-            fs.writeFile('class21/HomeData/Home.json', JSON.stringify(allHomes), err => {
+
+            console.log("✅ Saving home:", this); // Debugging line
+
+            fs.writeFile('class21/HomeData/Home.json', JSON.stringify(allHomes, null, 2), err => {
                 if (err) {
-                    console.log('Server error:', err);
+                    console.log('❌ Server error while writing file:', err);
+                } else {
+                    console.log('✅ File written successfully');
                 }
             });
         });
@@ -40,6 +47,15 @@ module.exports = class HomeData {
         this.fetchingAll(homes => {
             const homeFound = homes.find(home => home.id === homeId);
             callback(homeFound);
+        });
+    }
+    static deleteById(homeId, callback) {
+        this.fetchingAll(homes => {
+            const homeDelete = homes.filter(home => home.id !== homeId);
+            fs.writeFile('class21/HomeData/Home.json', JSON.stringify(homeDelete), err => {
+
+                favourites.deleteById(homeId, callback)
+            });
         });
     }
 }
