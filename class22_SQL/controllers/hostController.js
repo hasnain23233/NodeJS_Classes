@@ -33,8 +33,8 @@ exports.gethostHomeList = (req, res, next) => {
 
 // Add New Home
 exports.postAddHome = (req, res, next) => {
-    const { name, email, home, img } = req.body;
-    const Homedata = new RegiesterHome(null, name, email, home, img); // ✅ Fix here
+    const { name, email, home, img, description } = req.body;
+    const Homedata = new RegiesterHome(null, name, email, home, img, description); // ✅ Fix here
     Homedata.save();
     const sucessReqister = { name, email, home };
     res.render('host/Success', { sucessReqister });
@@ -42,8 +42,8 @@ exports.postAddHome = (req, res, next) => {
 
 // Edit Existing Home
 exports.postEditHome = (req, res, next) => {
-    const { id, name, email, home, img } = req.body;
-    const Homedata = new RegiesterHome(id, name, email, home, img); // ✅ Fix here
+    const { id, name, email, home, img, description } = req.body;
+    const Homedata = new RegiesterHome(id, name, email, home, img, description); // ✅ Fix here
     Homedata.save();
     res.redirect('/host_home_List');
 };

@@ -45,6 +45,11 @@
         <input type="text" id="img" name="img" value="<%= editing ? home.img : ''%>" placeholder="send you image link input" required
           class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"/>
       </div>
+      <div>
+        <label for="home" class="block text-sm font-medium text-gray-700">Description</label>
+        <textarea id="home" name="home" placeholder="Description" required
+          class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm h-28 focus:ring-red-500 focus:border-red-500"><%= editing ? home.description : '' %></textarea>
+      </div>
         <!-- Submit Button -->
         <div class="text-center">
           <button type="submit"

@@ -31,5 +31,5 @@ app.use(Error.getEror404)
 
 
 app.listen(4200, () => {
-    console.log('Your server is running on http://localhost:4200 ')
+    console.log('Your server is running on http://localhost:4200')
 })
