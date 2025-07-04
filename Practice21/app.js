@@ -7,16 +7,10 @@ const pathUtils = require('./utility/pathUtils')
 const Error = require('./controllers/Error')
 const path = require('path')
 
-const DB = require('./utility/database')
 
 
 const app = express()
 
-DB.execute("SELECT * FROM homes").then(([row, field]) => {
-    console.log(row)
-}).catch((error) => {
-    console.log('We counld fetching the database', error)
-})
 
 app.use(express.static(path.join(pathUtils, 'public')))
 

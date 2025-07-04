@@ -26,7 +26,7 @@ exports.getEditHome = (req, res, next) => {
 }
 
 exports.gethostHomeList = (req, res, next) => {
-    RegiesterHome.fetchingAll((data) => {
+    RegiesterHome.fetchingAll().then(([data]) => {
         res.render('host/hostHomeList', { HomeData: data })
     })
 }
@@ -34,7 +34,7 @@ exports.gethostHomeList = (req, res, next) => {
 // Add New Home
 exports.postAddHome = (req, res, next) => {
     const { name, email, home, img } = req.body;
-    const Homedata = new RegiesterHome(null, name, email, home, img); // ✅ Fix here
+    const Homedata = new RegiesterHome(null, name, email, home, img);
     Homedata.save();
     const sucessReqister = { name, email, home };
     res.render('host/Success', { sucessReqister });

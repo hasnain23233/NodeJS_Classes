@@ -2,8 +2,13 @@ const favourites = require('../models/favourites')
 const RegiesterHome = require('../models/HomeData')
 
 
+exports.getIndex = (req, res, next) => {
+    RegiesterHome.fetchingAll().then(([data]) => {
+        res.render('store/index', { HomeData: data })
+    })
+}
 exports.getHomeList = (req, res, next) => {
-    RegiesterHome.fetchingAll((data) => {
+    RegiesterHome.fetchingAll().then(([data]) => {
         res.render('store/homeList', { HomeData: data })
     })
 }
@@ -13,11 +18,11 @@ exports.getBooking = (req, res, next) => {
 
 exports.getfavourites = (req, res, next) => {
     favourites.getToFvt(favIds => {
-        RegiesterHome.fetchingAll((homes) => {
+        RegiesterHome.fetchingAll().then(([homes]) => {
             const cleanFavIds = favIds.map(id => String(id).trim());
             const fvtHomes = homes.filter(home => cleanFavIds.includes(String(home.id).trim()));
             res.render('store/favourites', { fvtHomes: fvtHomes });
-        });
+        })
     });
 };
 
@@ -43,11 +48,6 @@ exports.postRemoveForFavroit = (req, res, next) => {
 }
 
 
-exports.getInder = (req, res, next) => {
-    RegiesterHome.fetchingAll((data) => {
-        res.render('store/index', { HomeData: data })
-    })
-}
 exports.getHomeDetails = (req, res, next) => {
     const homeId = req.params.homeId
 
