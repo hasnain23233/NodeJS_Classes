@@ -26,7 +26,7 @@ exports.getEditHome = (req, res, next) => {
 }
 
 exports.gethostHomeList = (req, res, next) => {
-    RegiesterHome.fetchingAll((data) => {
+    RegiesterHome.fetchingAll().then(([data]) => {
         res.render('host/hostHomeList', { HomeData: data })
     })
 }
