@@ -3,18 +3,19 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Airbnb Clone</title>
+  <title>Home List</title>
   <link rel="stylesheet" href="output.css" />
 </head>
 <body class="bg-gray-100 font-sans">
-  <%- include('./../components/Header.ejs') %>
+  <%- include('./../Partials/Header.ejs') %>
 
   <div class="min-h-screen flex items-center justify-center bg-gray-100 py-10">
     <div class="w-[90%] max-w-6xl p-6 bg-white shadow-xl rounded-lg">
-      <h1 class="text-4xl font-extrabold text-red-500 text-center mb-8">
-        Homes List
+      <h1 class="text-4xl font-extrabold  text-red-500 text-center mb-8">
+        Home List
       </h1>
-      
+  
+      <!-- Card Grid Start -->
       <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         <% HomeData.forEach((data) => { %>
           <div class="bg-gray-50 border border-gray-200 p-4 rounded-xl shadow-sm hover:shadow-lg transition duration-300">
@@ -28,13 +29,15 @@
             <p class="text-gray-600">
               <span class="font-medium text-gray-700">Home:</span> <%= data.home %>
             </p>
-            <div class="flex items-center gap-3">
-              <a href="/home/<%= data.id %>" class="inline-block px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition">Detail</a>
-            <%- include('./../components/fvt.ejs' , {homeDetail : data}) %>
+            <br>
+            <div class="flex items-center gap-3 text-center">
+              <a href="/homes-list/<%= data.id %>" class="inline-block px-6 py-3 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition">Detail</a>
+            <%- include('./../Partials/fvt.ejs' , {homeDetail: data}) %>
             </div>
           </div>
         <% }) %>
       </div>
+      <!-- Card Grid End -->
   
       <div class="mt-10 text-center">
         <a href="/add_home" class="inline-block px-8 py-3 bg-red-500 text-white font-semibold rounded-full hover:bg-red-600 transition duration-300 shadow-md">
