@@ -1,12 +1,13 @@
 {
   "scripts": {
-    "tailwind": "npx tailwindcss -i class21/views/input.css -o class21/public/output.css --watch",
+    "tailwind": "npx tailwindcss -i Practice21/views/input.css -o Practice21/public/output.css --watch",
     "start": "npm run tailwind"
   },
   "dependencies": {
     "body-parser": "^2.2.0",
     "ejs": "^3.1.10",
-    "express": "^5.1.0"
+    "express": "^5.1.0",
+    "mysql2": "^3.14.1"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.21",
