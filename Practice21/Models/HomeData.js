@@ -1,61 +1,41 @@
-const fs = require('fs');
-const favourites = require('./favourites');
-
-module.exports = class HomeData {
-    constructor(id, name, email, home, img) {
-        this.id = id;
-        this.name = name;
-        this.email = email;
-        this.home = home;
-        this.img = img;
+const fs = require('fs')
+module.exports = class RegistrationHome {
+    constructor(name, email, home, img) {
+        this.name = name
+        this.email = email
+        this.home = home
+        this.img = img
     }
-
 
     save() {
-        HomeData.fetchingAll(allHomes => {
-            if (this.id) {
-                allHomes = allHomes.map(home => home.id === this.id ? this : home);
-            } else {
-                this.id = Math.random().toString();
-                allHomes.push(this);
-            }
-
-            console.log("✅ Saving home:", this); // Debugging line
-
-            fs.writeFile('class21/HomeData/Home.json', JSON.stringify(allHomes, null, 2), err => {
+        this.id = Math.random().toString()
+        RegistrationHome.fetchingData(RegisterHome => {
+            RegisterHome.push(this)
+            fs.writeFile('Practice21/HomeData/homes.json', JSON.stringify(RegisterHome), (err, data) => {
                 if (err) {
-                    console.log('❌ Server error while writing file:', err);
+                    console.log('Data saved successfully!')
                 } else {
-                    console.log('✅ File written successfully');
+                    console.log(data)
                 }
-            });
-        });
+            })
+        })
     }
 
-    static fetchingAll(callback) {
-        fs.readFile('class21/HomeData/Home.json', (err, data) => {
-            if (!err) {
-                const parsedData = JSON.parse(data);
-                callback(parsedData);
+    static fetchingData(callback) {
+        fs.readFile('Practice21/HomeData/homes.json', (err, fileData) => {
+            if (!err && fileData.length > 0) {
+                const data = JSON.parse(fileData)
+                callback(data)
             } else {
-                callback([]);
+                callback([])
             }
-        });
+        })
     }
 
-    static findById(homeId, callback) {
-        this.fetchingAll(homes => {
-            const homeFound = homes.find(home => home.id === homeId);
-            callback(homeFound);
-        });
-    }
-    static deleteById(homeId, callback) {
-        this.fetchingAll(homes => {
-            const homeDelete = homes.filter(home => home.id !== homeId);
-            fs.writeFile('class21/HomeData/Home.json', JSON.stringify(homeDelete), err => {
-
-                favourites.deleteById(homeId, callback)
-            });
-        });
+    static findbyId(homeId, callback) {
+        this.fetchingData(home => {
+            const homeData = home.find(home => home.id === homeId)
+            callback(homeData)
+        })
     }
 }
