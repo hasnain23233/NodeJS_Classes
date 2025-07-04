@@ -36,7 +36,7 @@ exports.postAddHome = (req, res, next) => {
     const { name, email, home, img, description } = req.body;
     const Homedata = new RegiesterHome(null, name, email, home, img, description); // ✅ Fix here
     Homedata.save();
-    const sucessReqister = { name, email, home };
+    const sucessReqister = { name, email, home, description };
     res.render('host/Success', { sucessReqister });
 };
 

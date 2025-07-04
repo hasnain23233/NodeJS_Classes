@@ -12,6 +12,7 @@ module.exports = class HomeData {
 
 
     save() {
+        return db.execute('INSERT INTO homes (name, email, home, img, description) VALUES (? , ? , ? , ? , ? )', [this.name, this.email, this.home, this.img, this.description])
 
     }
 
