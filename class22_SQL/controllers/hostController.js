@@ -11,7 +11,8 @@ exports.getEditHome = (req, res, next) => {
     const homeId = req.params.homeId
     const queryEditing = req.query.editing === 'true'
 
-    RegiesterHome.findById(homeId, home => {
+    RegiesterHome.findById(homeId).then(([homes]) => {
+        const home = homes[0]
         if (!home) {
             console.log('sorry your home page was not found!!')
             return res.redirect('/host_home_List')
@@ -51,10 +52,7 @@ exports.postEditHome = (req, res, next) => {
 exports.postDeleteHome = (req, res, next) => {
     const homeId = req.params.homeId
     console.log("You are deleting home ", homeId)
-    RegiesterHome.deleteById(homeId, err => {
-        if (err) {
-            console.log('error while deleting', err)
-        }
+    RegiesterHome.deleteById(homeId).then(([data]) => {
         res.redirect('/host_home_List')
     })
 }
