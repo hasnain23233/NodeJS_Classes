@@ -1,8 +1,8 @@
 const mongoDB = require('mongodb')
 const mongoClinet = mongoDB.MongoClient
+require('dotenv').config()
 
-
-const mongUrl = "mongodb+srv://hasnainkhushi152:hasnainDev124@codelover.fugp4je.mongodb.net/?retryWrites=true&w=majority&appName=codeLover"
+const mongUrl = process.env.MONGO_URL
 let _db;
 
 const MongoConnect = (callback) => {
