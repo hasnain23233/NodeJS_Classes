@@ -6,7 +6,7 @@ const { hostRoute } = require('./routes/host/hostRout')
 const pathUtils = require('./utility/pathUtils')
 const Error = require('./controllers/Error')
 const path = require('path')
-const mongoConnect = require('./utility/databaseUtils')
+const { mongoConnect } = require('./utility/databaseUtils')
 
 const app = express()
 
@@ -31,8 +31,7 @@ app.use(Error.getEror404)
 
 
 
-mongoConnect((client) => {
-    console.log(client)
+mongoConnect(() => {
     app.listen(4200, () => {
         console.log('Your server is running on http://localhost:4200 mongoDB')
     })
