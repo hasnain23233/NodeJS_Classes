@@ -16,7 +16,18 @@ module.exports = class HomeData {
 
     save() {
         const db = getDB();
-        return db.collection("homes").insertOne(this)
+        if (this._id) {
+            const updatedFields = {
+                name: this.name,
+                email: this.email,
+                home: this.home,
+                img: this.img,
+                description: this.description
+            }
+            return db.collection("homes").updateOne({ _id: new ObjectId(String(this._id)) }, { $set: updatedFields })
+        } else {
+            return db.collection("homes").insertOne(this)
+        }
     }
 
     static fetchingAll() {
@@ -29,5 +40,8 @@ module.exports = class HomeData {
         return db.collection('homes').find({ _id: new ObjectId(String(homeId)) }).next()
     }
     static deleteById(homeId) {
+        const db = getDB()
+        return db.collection('homes').deleteOne({ _id: new ObjectId(String(homeId)) })
     }
+
 }

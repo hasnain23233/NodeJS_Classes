@@ -44,8 +44,8 @@ exports.postAddHome = (req, res, next) => {
 
 // Edit Existing Home
 exports.postEditHome = (req, res, next) => {
-    const { _id, name, email, home, img, description } = req.body;
-    const Homedata = new RegiesterHome(_id, name, email, home, img, description); // ✅ Fix here
+    const { id, name, email, home, img, description } = req.body;
+    const Homedata = new RegiesterHome(id, name, email, home, img, description); // ✅ Fix here
     Homedata.save();
     res.redirect('/host_home_List');
 };
@@ -53,7 +53,7 @@ exports.postEditHome = (req, res, next) => {
 exports.postDeleteHome = (req, res, next) => {
     const homeId = req.params.homeId
     console.log("You are deleting home ", homeId)
-    RegiesterHome.deleteById(homeId).then(([data]) => {
+    RegiesterHome.deleteById(homeId).then(() => {
         res.redirect('/host_home_List')
     })
 }

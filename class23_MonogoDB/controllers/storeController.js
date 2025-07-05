@@ -1,4 +1,4 @@
-const favourites = require('../models/favourites')
+const Favourites = require('../models/favourites')
 const RegiesterHome = require('../models/HomeData')
 
 exports.getIndex = (req, res, next) => {
@@ -20,7 +20,8 @@ exports.getBooking = (req, res, next) => {
 }
 
 exports.getfavourites = (req, res, next) => {
-    favourites.getToFvt(favIds => {
+    Favourites.getToFvt().then(favIds => {
+        favIds = favIds.map(fav => fav.houseID)
         RegiesterHome.fetchingAll().then((homes) => {
             const cleanFavIds = favIds.map(id => String(id).trim());
             const fvtHomes = homes.filter(home => cleanFavIds.includes(String(home._id).trim()));
@@ -31,23 +32,36 @@ exports.getfavourites = (req, res, next) => {
 
 
 
+// Controller
 exports.postAddFvt = (req, res, next) => {
-    favourites.addToFvt(req.body.id, error => {
-        if (error) {
-            console.log('error while marking', error)
-        }
-        res.redirect('/favourites')
-    })
-}
+    const homeId = req.body.id;
+    console.log("🏠 House ID Received:", homeId);  // Debug
+
+    const fvtModel = new Favourites(homeId);
+    fvtModel.save()
+        .then((result) => {
+            console.log("✅ fvt added ", result.insertedId);
+        })
+        .catch((error) => {
+            console.log("❌ We can`t add the fvt ", error.message);
+        })
+        .finally(() => {
+            res.redirect('/favourites');
+        });
+};
+
 
 exports.postRemoveForFavroit = (req, res, next) => {
     const homeId = req.params.homeId
-    favourites.deleteById(homeId, err => {
-        if (err) {
-            console.log("Error while removing from favourites page", err)
-        }
-        res.redirect('/favourites')
+    Favourites.deleteById(homeId).then((result) => {
+        console.log("✅ fvt remove ", result.insertedId);
     })
+        .catch((error) => {
+            console.log("❌ We can`t remove the fvt ", error.message);
+        })
+        .finally(() => {
+            res.redirect('/favourites');
+        });
 }
 
 
