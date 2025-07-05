@@ -2,14 +2,14 @@ const favourites = require('../models/favourites')
 const RegiesterHome = require('../models/HomeData')
 
 exports.getIndex = (req, res, next) => {
-    RegiesterHome.fetchingAll().then(([data]) => {
+    RegiesterHome.fetchingAll().then((data) => {
         res.render('store/index', { HomeData: data })
     }).catch((error) => {
         console.log('we can`t connect to database', error)
     })
 }
 exports.getHomeList = (req, res, next) => {
-    RegiesterHome.fetchingAll().then(([data]) => {
+    RegiesterHome.fetchingAll().then((data) => {
         res.render('store/homeList', { HomeData: data })
     }).catch((error) => {
         console.log('we can`t connect to database', error)
@@ -21,9 +21,9 @@ exports.getBooking = (req, res, next) => {
 
 exports.getfavourites = (req, res, next) => {
     favourites.getToFvt(favIds => {
-        RegiesterHome.fetchingAll().then(([homes]) => {
+        RegiesterHome.fetchingAll().then((homes) => {
             const cleanFavIds = favIds.map(id => String(id).trim());
-            const fvtHomes = homes.filter(home => cleanFavIds.includes(String(home.id).trim()));
+            const fvtHomes = homes.filter(home => cleanFavIds.includes(String(home._id).trim()));
             res.render('store/favourites', { fvtHomes: fvtHomes });
         });
     });
@@ -55,8 +55,7 @@ exports.postRemoveForFavroit = (req, res, next) => {
 exports.getHomeDetails = (req, res, next) => {
     const homeId = req.params.homeId
 
-    RegiesterHome.findById(homeId).then(([homes]) => {
-        const home = homes[0]
+    RegiesterHome.findById(homeId).then((home) => {
         if (!home) {
             console.log('home not found')
             res.redirect('/homes')

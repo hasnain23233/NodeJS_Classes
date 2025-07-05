@@ -11,8 +11,7 @@ exports.getEditHome = (req, res, next) => {
     const homeId = req.params.homeId
     const queryEditing = req.query.editing === 'true'
 
-    RegiesterHome.findById(homeId).then(([homes]) => {
-        const home = homes[0]
+    RegiesterHome.findById(homeId).then((home) => {
         if (!home) {
             console.log('sorry your home page was not found!!')
             return res.redirect('/host_home_List')
@@ -27,7 +26,7 @@ exports.getEditHome = (req, res, next) => {
 }
 
 exports.gethostHomeList = (req, res, next) => {
-    RegiesterHome.fetchingAll().then(([data]) => {
+    RegiesterHome.fetchingAll().then(data => {
         res.render('host/hostHomeList', { HomeData: data })
     })
 }
@@ -45,8 +44,8 @@ exports.postAddHome = (req, res, next) => {
 
 // Edit Existing Home
 exports.postEditHome = (req, res, next) => {
-    const { id, name, email, home, img, description } = req.body;
-    const Homedata = new RegiesterHome(id, name, email, home, img, description); // ✅ Fix here
+    const { _id, name, email, home, img, description } = req.body;
+    const Homedata = new RegiesterHome(_id, name, email, home, img, description); // ✅ Fix here
     Homedata.save();
     res.redirect('/host_home_List');
 };
