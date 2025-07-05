@@ -14,9 +14,6 @@ module.exports = class HomeData {
     save() {
         const db = getDB();
         return db.collection("homes").insertOne(this)
-
-
-
     }
 
     static fetchingAll() {
