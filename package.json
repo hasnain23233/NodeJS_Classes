@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "tailwind": "npx tailwindcss -i class23_MonogoDB/views/input.css -o class23_MonogoDB/public/output.css --watch",
+    "tailwind": "npx tailwindcss -i Practice23_mongoDB/views/input.css -o Practice23_mongoDB/public/output.css --watch",
     "start": "npm run tailwind"
   },
   "dependencies": {
