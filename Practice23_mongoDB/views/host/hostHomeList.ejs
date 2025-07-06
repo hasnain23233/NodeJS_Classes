@@ -34,8 +34,8 @@
             </p>
             <br>
             <div class="flex items-center gap-3 text-center">
-              <a href="/host/edit-home/<%= data.id %>?editing=true" class="p-2 w-28 text-white  rounded-md bg-blue-500">Edit</a>
-              <form action="/host/delete-home/<%= data.id %>" method="post">
+              <a href="/host/edit-home/<%= data._id %>?editing=true" class="p-2 w-28 text-white  rounded-md bg-blue-500">Edit</a>
+              <form action="/host/delete-home/<%= data._id %>" method="post">
                 <button type="submit" class="p-2 w-28 text-white  rounded-md bg-red-500">Delete</button>
               </form>
             </div>

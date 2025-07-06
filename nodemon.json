@@ -2,6 +2,6 @@
     "watch": ["."],
     "ext": "js,json,ejs",
     "ignore": ["node_modules", "class23_MonogoDB/HomeData/"],
-    "exec": "node ./class23_MonogoDB/app.js"
+    "exec": "node ./Practice23_mongoDB/app.js"
   }
   
