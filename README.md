@@ -132,6 +132,51 @@ This repository is a complete guide for learning backend development with **Node
 - Deep dive into organizing models for reusability  
 
 ---
+## 🗃️ Database Integration
+
+### 25. 🧮 Introduction to SQL
+- What is SQL?
+- Relational database structure
+- Examples: MySQL, PostgreSQL
+
+### 26. 🧾 Introduction to NoSQL
+- What is NoSQL?
+- Document-based structure
+- Examples: MongoDB, Firebase
+
+### 27. 🔗 Connecting SQL Database with App
+- Using libraries like `mysql2` or `sequelize`
+- Basic SQL connection setup in Node.js
+- Running queries from backend
+
+### 28. ⚙️ CRUD Operations with SQL
+- Create, Read, Update, Delete
+- Parameterized queries
+- Using async/await or callbacks
+
+### 29. 🌍 Introduction to MongoDB Atlas
+- Cloud-based MongoDB
+- Creating a cluster
+- Getting connection string
+
+### 30. 🧭 Introduction to MongoDB Compass
+- GUI for managing MongoDB databases
+- Creating collections and documents
+- Viewing and modifying data visually
+
+### 31. 🔗 Connecting MongoDB with App
+- Using `mongoose` or native `mongodb` driver
+- Connecting to local or Atlas DB
+- Handling connection events
+
+### 32. 🧑‍💻 CRUD Operations with MongoDB
+- Using Mongoose Models
+- Create: `model.save()`
+- Read: `Model.find()`, `Model.findById()`
+- Update: `Model.findByIdAndUpdate()`
+- Delete: `Model.findByIdAndDelete()`
+
+---
 
 ## ✅ Requirements
 
