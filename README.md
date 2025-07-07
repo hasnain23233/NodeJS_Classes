@@ -103,6 +103,52 @@ This repository is a complete guide for learning backend development with **Node
 - Sending responses and status codes
 
 ---
+### 20. 🧩 Using Tailwind CSS with Static Files
+- How to configure Tailwind CSS in a Node.js + Express setup  
+- Serving static CSS and JS using `express.static()`  
+- Example structure for `public/` folder  
+
+### 21. 🌐 Dynamic UI using `.EJS`
+- Setting up `EJS` as view engine  
+- Passing dynamic data from backend to frontend  
+- Embedding JavaScript logic directly into HTML  
+
+### 22. ❓ What is EJS?
+- EJS stands for **Embedded JavaScript Templating**  
+- It allows you to generate HTML markup with plain JavaScript  
+- Similar to templating engines like Handlebars, Pug, etc.  
+
+### 23. 🧠 Model-View-Controller (MVC) Architecture
+- MVC is a design pattern for organizing backend projects  
+- **Model** – handles data and business logic  
+- **View** – displays content (EJS templates)  
+- **Controller** – handles routes and input/output logic  
+- Benefits: Scalability, separation of concerns, cleaner code  
+
+### 24. 🧭 Dynamic Paths and Model Deep Dive
+- How to handle dynamic routes like `/user/:id`, `/product/:slug`  
+- Extracting params using Express  
+- Integrating model logic to fetch specific data  
+- Deep dive into organizing models for reusability  
+
+---
+
+## ✅ Requirements
+
+- Node.js v18+
+- Express.js
+- EJS and Tailwind CSS setup
+- Basic understanding of JavaScript & HTML
+
+---
+
+## 👨‍💻 Author
+
+**Hasnain Khushi**  
+📧 hasnainkhushii@gmail.com  
+🔗 [GitHub](https://github.com/hasnain23233)  
+📍 Gilgit, Pakistan
+
 
 ## ✅ Requirements
 
