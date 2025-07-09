@@ -1,7 +1,7 @@
 {
     "watch": ["."],
     "ext": "js,json,ejs",
-    "ignore": ["node_modules", "class23_MonogoDB/HomeData/"],
-    "exec": "node ./Practice23_mongoDB/app.js"
+    "ignore": ["node_modules", "class24_Mongoose/HomeData/"],
+    "exec": "node ./class24_Mongoose/app.js"
   }
   

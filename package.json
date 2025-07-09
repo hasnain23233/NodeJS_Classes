@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "tailwind": "npx tailwindcss -i Practice23_mongoDB/views/input.css -o Practice23_mongoDB/public/output.css --watch",
+    "tailwind": "npx tailwindcss -i class24_Mongoose/views/input.css -o class24_Mongoose/public/output.css --watch",
     "start": "npm run tailwind"
   },
   "dependencies": {
@@ -9,6 +9,7 @@
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "mongodb": "^6.17.0",
+    "mongoose": "^8.16.2",
     "mysql2": "^3.14.1"
   },
   "devDependencies": {
