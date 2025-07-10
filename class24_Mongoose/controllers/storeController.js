@@ -1,4 +1,4 @@
-const Favourites = require('../models/favourites')
+const favourites = require('../models/favourites')
 const Home = require('../models/HomeData')
 
 exports.getIndex = (req, res, next) => {
@@ -20,8 +20,8 @@ exports.getBooking = (req, res, next) => {
 }
 
 exports.getfavourites = (req, res, next) => {
-    Favourites.getToFvt().then(favIds => {
-        favIds = favIds.map(fav => fav.houseID)
+    favourites.find().then(favIds => {
+        favIds = favIds.map(fav => fav.houseID.toString())
         Home.find().then((homes) => {
             const cleanFavIds = favIds.map(id => String(id).trim());
             const fvtHomes = homes.filter(home => cleanFavIds.includes(String(home._id).trim()));
@@ -53,7 +53,7 @@ exports.postAddFvt = (req, res, next) => {
 
 exports.postRemoveForFavroit = (req, res, next) => {
     const homeId = req.params.homeId
-    Favourites.deleteById(homeId).then((result) => {
+    favourites.deleteById(homeId).then((result) => {
         console.log("✅ fvt remove ", result.insertedId);
     })
         .catch((error) => {

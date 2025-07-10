@@ -1,9 +1,5 @@
 const mongoose = require('mongoose')
 
-/*
-        save()  find() findById(homeId) deleteById(homeId)
-
-*/
 
 const homeSchema = new mongoose.Schema({
     name: { type: String, require: true },
