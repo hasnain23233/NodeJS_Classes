@@ -20,14 +20,11 @@ exports.getBooking = (req, res, next) => {
 }
 
 exports.getfavourites = (req, res, next) => {
-    favourites.find().then(favIds => {
-        favIds = favIds.map(fav => fav.houseID.toString())
-        Home.find().then((homes) => {
-            const cleanFavIds = favIds.map(id => String(id).trim());
-            const fvtHomes = homes.filter(home => cleanFavIds.includes(String(home._id).trim()));
+    favourites.find()
+        .populate('houseID').then((favIds) => {
+            const fvtHomes = favIds.map((fav) => fav.houseID)
             res.render('store/favourites', { fvtHomes: fvtHomes });
         });
-    });
 };
 
 
@@ -57,7 +54,7 @@ exports.postAddFvt = (req, res, next) => {
 
 exports.postRemoveForFavroit = (req, res, next) => {
     const homeId = req.params.homeId
-    favourites.findByIdAndDelete({ houseID: homeId }).then((result) => {
+    favourites.findOneAndDelete({ houseID: homeId }).then((result) => {
         console.log("✅ fvt remove ", result.insertedId);
     })
         .catch((error) => {
