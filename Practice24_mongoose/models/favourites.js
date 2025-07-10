@@ -1,26 +1,6 @@
-module.exports = class favourites {
-    constructor(houseID) {
-        this.houseID = houseID
-    }
-    save() {
-        const db = getDB()
-        return db.collection("favourites").findOne({ houseID: this.houseID }).then((existingFvt) => {
-            if (!existingFvt) {
-                return db.collection("favourites").insertOne(this)
-            } else {
-                return new Promise.resolve()
-            }
-        })
-    }
+const mongoose = require('mongoose')
 
-    static getToFvt() {
-        const db = getDB()
-        return db.collection('favourites').find().toArray()
-    }
-    static deleteById(delHomeId) {
-        const db = getDB()
-        return db.collection('favourites').deleteOne({ houseID: delHomeId })
-    }
-
-
-}
+const FvtSchema = new mongoose.Schema({
+    houseID: { type: mongoose.Schema.Types.ObjectId, ref: 'Home', require: true, unique: true }
+})
+module.exports = mongoose.model('favourites', FvtSchema)

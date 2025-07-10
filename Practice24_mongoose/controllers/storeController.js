@@ -20,35 +20,37 @@ exports.getBooking = (req, res, next) => {
 }
 
 exports.getfavourites = (req, res, next) => {
-    favourites.getToFvt().then(favIds => {
-        favIds = favIds.map(fav => fav.houseID)
-        Home.find().then((homes) => {
-            const cleanFavIds = favIds.map(id => String(id).trim());
-            const fvtHomes = homes.filter(home => cleanFavIds.includes(String(home._id).trim()));
-            res.render('store/favourites', { fvtHomes: fvtHomes });
-        });
+    favourites.find().populate('houseID').then(favIds => {
+        const fvtHomes = favIds.map(fav => fav.houseID)
+        res.render('store/favourites', { fvtHomes: fvtHomes });
     });
 };
 
 
 
 exports.postAddFvt = (req, res, next) => {
-    const homeid = new favourites(req.body.id)
-    homeid.save()
-        .then((result) => {
-            console.log("✅ fvt added ", result.insertedId);
-        })
-        .catch((error) => {
-            console.log("❌ We can`t add the fvt ", error.message);
-        })
-        .finally(() => {
-            res.redirect('/favourites');
-        });
+    const homeid = req.body.id
+    favourites.findOne({ houseID: homeid }).then((fav) => {
+        if (fav) {
+            console.log('Already Fvt marked')
+        } else {
+            fav = new favourites({ houseID: homeid })
+            fav.save()
+                .then((result) => {
+                    console.log("✅ fvt added ", result.insertedId);
+                })
+                .catch((error) => {
+                    console.log("❌ We can`t add the fvt ", error.message);
+                })
+        }
+        res.redirect('/favourites');
+    })
+
 }
 
 exports.postRemoveForFavroit = (req, res, next) => {
     const homeId = req.params.homeId
-    favourites.deleteById(homeId).then((result) => {
+    favourites.findOneAndDelete({ houseID: homeId }).then((result) => {
         console.log("✅ fvt remove ", result.insertedId);
     })
         .catch((error) => {
