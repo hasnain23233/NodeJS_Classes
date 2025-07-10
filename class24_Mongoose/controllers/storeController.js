@@ -35,25 +35,29 @@ exports.getfavourites = (req, res, next) => {
 // Controller
 exports.postAddFvt = (req, res, next) => {
     const homeId = req.body.id;
-    console.log("🏠 House ID Received:", homeId);  // Debug
 
-    const fvtModel = new Favourites(homeId);
-    fvtModel.save()
-        .then((result) => {
-            console.log("✅ fvt added ", result.insertedId);
-        })
-        .catch((error) => {
-            console.log("❌ We can`t add the fvt ", error.message);
-        })
-        .finally(() => {
-            res.redirect('/favourites');
-        });
+    favourites.findOne({ houseID: homeId }).then((fav) => {
+        if (fav) {
+            console.log('Already Favrouted marked')
+        } else {
+            fav = new favourites({ houseID: homeId })
+            fav.save().then((result) => {
+                console.log("✅ fvt added ", result);
+            }).catch((err) => {
+                console.log('Can adding fvt this home', err.message)
+            })
+        }
+        res.redirect('/favourites');
+    }).catch((err) => {
+        console.log('error while marking favourties ', err.message)
+    })
+
 };
 
 
 exports.postRemoveForFavroit = (req, res, next) => {
     const homeId = req.params.homeId
-    favourites.deleteById(homeId).then((result) => {
+    favourites.findByIdAndDelete({ houseID: homeId }).then((result) => {
         console.log("✅ fvt remove ", result.insertedId);
     })
         .catch((error) => {
