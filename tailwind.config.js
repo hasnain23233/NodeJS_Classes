@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./Practice24_mongoose/views/**/*.ejs'],
+  content: ['./class24_Mongoose/views/**/*.ejs'],
   theme: {
     extend: {},
   },
