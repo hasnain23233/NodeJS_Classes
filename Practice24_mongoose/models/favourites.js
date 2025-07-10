@@ -1,5 +1,3 @@
-const { getDB } = require("../utility/databaseUtils")
-
 module.exports = class favourites {
     constructor(houseID) {
         this.houseID = houseID

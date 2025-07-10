@@ -5,11 +5,11 @@ const homeSchema = new mongoose.Schema({
     email: { type: String, require: true },
     home: { type: String, require: true },
     img: { type: String, require: true },
-    desc: { type: String, require: true },
+    description: { type: String, require: true },
 })
 
 /*
-        save() fetchingAll() findById(homeId) deleteById(homeId)
+        save() find() findById(homeId) deleteById(homeId)
 */
 
-module.exports = mongoose.model('homes', homeSchema);
+module.exports = mongoose.model('Home', homeSchema);
