@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Form</title>
+  <link rel="stylesheet" href="/output.css" />
+</head>
+<body>
+  <%- include('./../Partials/Header.ejs') %>
+  <br><br> <br>
+<div  class="flex items-center justify-center mt-[200] bg-gradient-to-br from-blue-100 to-indigo-200">
+
+  <div class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-md">
+    <h2 class="text-3xl font-bold text-center text-indigo-600 mb-6">Login airbnd</h2>
+
+    <form class="space-y-5" action="/login" method="post">
+      <!-- Email Input -->
+      <div>
+        <label for="email" class="block text-sm font-medium text-gray-700">Email address</label>
+        <input
+          type="email"
+          id="email"
+          name="username"
+          placeholder="username/email"
+          class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          required
+        />
+      </div>
+
+      <!-- Password Input -->
+      <div>
+        <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="••••••••"
+          class="mt-1 w-full px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+          required
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <div>
+        <button
+          type="submit"
+          class="w-full bg-indigo-600 text-white py-2 px-4 rounded-lg hover:bg-indigo-700 transition duration-300 font-semibold"
+        >
+          Log In
+        </button>
+      </div>
+      
+    <!-- Extra Links -->
+    <p class="mt-4 text-sm text-center text-gray-600">
+    <button type="submit" class="inline-block m-auto px-6 py-3 bg-yellow-500 text-white rounded-full hover:bg-yellow-600 transition">Submit</button>
+    </p>
+    </form>
+
+
+  </div>
+</div>
+
+</body>
+</html>
