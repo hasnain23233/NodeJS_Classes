@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "tailwind": "npx tailwindcss -i Practice24_mongoose/views/input.css -o Practice24_mongoose/public/output.css --watch",
+    "tailwind": "npx tailwindcss -i class25_Cookies_session/views/input.css -o class25_Cookies_session/public/output.css --watch",
     "start": "npm run tailwind"
   },
   "dependencies": {

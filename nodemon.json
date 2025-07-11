@@ -1,7 +1,7 @@
 {
     "watch": ["."],
     "ext": "js,json,ejs",
-    "ignore": ["node_modules", "Practice24_mongoose/HomeData/"],
-    "exec": "node ./Practice24_mongoose/app.js"
+    "ignore": ["node_modules", "class25_Cookies_session/HomeData/"],
+    "exec": "node ./class25_Cookies_session/app.js"
   }
   
