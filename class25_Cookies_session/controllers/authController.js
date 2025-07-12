@@ -1,8 +1,10 @@
 exports.getLogin = (req, res, next) => {
-    res.render('auth/login')
+    res.render('auth/login', {
+        isLoggedIn: false
+    })
 }
 exports.postLogin = (req, res, next) => {
-    const { password, username } = req.body
-    console.log(password, username)
+    console.log(req.body)
+    req.isLoggedIn = true
     res.redirect('/')
 }

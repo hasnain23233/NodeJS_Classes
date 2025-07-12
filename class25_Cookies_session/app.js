@@ -28,8 +28,15 @@ app.use(bodyParser.urlencoded())
 
 
 app.use(userRoute)
-app.use(hostRoute)
 app.use(authRouter)
+app.use((req, res, next) => {
+    if (req.isLoggedIn) {
+        next()
+    } else {
+        res.redirect('/login')
+    }
+})
+app.use(hostRoute)
 
 app.use(Error.getEror404)
 
