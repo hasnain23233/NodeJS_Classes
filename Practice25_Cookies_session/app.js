@@ -7,6 +7,7 @@ const pathUtils = require('./utility/pathUtils')
 const Error = require('./controllers/Error')
 const path = require('path')
 const { default: mongoose } = require('mongoose')
+const authRouter = require('./routes/auth/login')
 require('dotenv').config()
 
 const mongoLink = process.env.class34_mongoDB
@@ -26,6 +27,14 @@ app.use(bodyParser.urlencoded())
 
 
 app.use(userRoute)
+app.use(authRouter)
+app.use((req, res, next) => {
+    if (req.isLoggedIn) {
+        next()
+    } else {
+        res.redirect('/login')
+    }
+})
 app.use(hostRoute)
 
 app.use(Error.getEror404)
