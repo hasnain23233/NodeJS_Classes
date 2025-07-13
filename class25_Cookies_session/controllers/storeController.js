@@ -2,6 +2,7 @@ const favourites = require('../models/favourites')
 const Home = require('../models/HomeData')
 
 exports.getIndex = (req, res, next) => {
+    console.log('session value is ', req.session)
     Home.find().then((data) => {
         res.render('store/index', {
             HomeData: data,

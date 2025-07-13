@@ -4,13 +4,10 @@ exports.getLogin = (req, res, next) => {
     })
 }
 exports.postLogin = (req, res, next) => {
-    res.cookie('isLoggedIn', true, {
-        httpOnly: true,
-        maxAge: 1000 * 60 * 60 // 1 hour
-    })
+    req.session.isLoggedIn = true
     res.redirect('/')
 }
 exports.postLogout = (req, res, next) => {
-    res.cookie('isLoggedIn', false)
+    req.session.isLoggedIn = false
     res.redirect('/login')
 }

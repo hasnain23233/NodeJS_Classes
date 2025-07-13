@@ -48,10 +48,9 @@ app.use(session({
 
 // Middleware to check login status from cookie
 app.use((req, res, next) => {
-    console.log('Cookies:', req.cookies) // Debug log
-    req.isLoggedIn = req.cookies.isLoggedIn === 'true'
-    next()
-})
+    req.isLoggedIn = req.session.isLoggedIn === true;
+    next();
+});
 
 // Auth routes (Login)
 app.use(authRouter)
