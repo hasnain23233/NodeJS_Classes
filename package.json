@@ -9,6 +9,7 @@
     "dotenv": "^17.0.1",
     "ejs": "^3.1.10",
     "express": "^5.1.0",
+    "express-session": "^1.18.1",
     "mongodb": "^6.17.0",
     "mongoose": "^8.16.2",
     "mysql2": "^3.14.1"

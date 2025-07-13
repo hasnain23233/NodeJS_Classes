@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser')
 const path = require('path')
 const { default: mongoose } = require('mongoose')
 require('dotenv').config()
+const session = require('express-session')
 
 // Import routes
 const userRoute = require('./routes/user/app')
@@ -37,6 +38,13 @@ app.use((req, res, next) => {
 // Body parser and cookie parser
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(cookieParser())
+
+//useing express_session middleware use here
+app.use(session({
+    secret: "Doroing.com",
+    resave: false,
+    saveUninitialized: true
+}))
 
 // Middleware to check login status from cookie
 app.use((req, res, next) => {
