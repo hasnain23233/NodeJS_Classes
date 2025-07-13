@@ -1,34 +1,57 @@
-//In this folder we make airbnd full beckend project using express.js and node js
+// In this folder we make Airbnb full backend project using Express.js and Node.js
+
 const express = require('express')
 const bodyParser = require('body-parser')
-const userRoute = require('./routes/user/app')
-const { hostRoute } = require('./routes/host/hostRout')
-const pathUtils = require('./utility/pathUtils')
-const Error = require('./controllers/Error')
+const cookieParser = require('cookie-parser')
 const path = require('path')
 const { default: mongoose } = require('mongoose')
 require('dotenv').config()
+
+// Import routes
+const userRoute = require('./routes/user/app')
+const { hostRoute } = require('./routes/host/hostRout')
 const authRouter = require('./routes/auth/login')
 
+// Utility & Error Handler
+const pathUtils = require('./utility/pathUtils')
+const Error = require('./controllers/Error')
+
+// MongoDB connection string
 const mongoLink = process.env.class34_mongoDB
+
 const app = express()
 
-
+// Serve static files
 app.use(express.static(path.join(pathUtils, 'public')))
 
+// Set view engine
 app.set('view engine', 'ejs')
 app.set('views', path.join(pathUtils, 'views'))
 
-app.use('/', (req, res, next) => {
+// Middleware for logging requests
+app.use((req, res, next) => {
     console.log(req.url, req.method)
     next()
 })
 
-app.use(bodyParser.urlencoded())
+// Body parser and cookie parser
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(cookieParser())
 
+// Middleware to check login status from cookie
+app.use((req, res, next) => {
+    console.log('Cookies:', req.cookies) // Debug log
+    req.isLoggedIn = req.cookies.isLoggedIn === 'true'
+    next()
+})
 
-app.use(userRoute)
+// Auth routes (Login)
 app.use(authRouter)
+
+// Public user routes (accessible even if not logged in)
+app.use(userRoute)
+
+// Protect host routes (require login)
 app.use((req, res, next) => {
     if (req.isLoggedIn) {
         next()
@@ -36,19 +59,21 @@ app.use((req, res, next) => {
         res.redirect('/login')
     }
 })
+
+// Protected routes
 app.use(hostRoute)
 
+// 404 Error route
 app.use(Error.getEror404)
 
-
-
-
-
-mongoose.connect(mongoLink).then(() => {
-    console.log('Successfully connected to the database')
-    app.listen(4200, () => {
-        console.log('Your server is running on http://localhost:4200')
+// MongoDB connection
+mongoose.connect(mongoLink)
+    .then(() => {
+        console.log('✅ Successfully connected to the database')
+        app.listen(4200, () => {
+            console.log('🚀 Server is running at http://localhost:4200')
+        })
     })
-}).catch((err) => {
-    console.log("sorry we can`t connected to the database")
-})
+    .catch((err) => {
+        console.log("❌ Failed to connect to the database", err)
+    })
