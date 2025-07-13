@@ -17,8 +17,16 @@
           ➕ <span>Add Home</span>
         </a>
     <% } %>
+    <% if(!isLoggedIn) { %>
     <a href="/login" class="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-red-600 transition duration-300 font-semibold shadow-sm flex items-center gap-2">
       <span>Login</span>
     </a>
+     <% } else {%>
+        <form action="/logout" method="post">
+          <button type="submit" class="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-red-600 transition duration-300 font-semibold shadow-sm flex items-center gap-2">
+            <span>logout</span>
+          </button>
+        </form>
+       <% } %>
   </nav>
 </header>
