@@ -9,6 +9,7 @@ const path = require('path')
 const { default: mongoose } = require('mongoose')
 const authRouter = require('./routes/auth/login')
 require('dotenv').config()
+const cookieParser = require('cookie-parser')
 
 const mongoLink = process.env.class34_mongoDB
 const app = express()
@@ -24,7 +25,13 @@ app.use('/', (req, res, next) => {
     next()
 })
 app.use(bodyParser.urlencoded())
+app.use(cookieParser())
 
+app.use((req, res, next) => {
+    console.log(req.cookies)
+    req.isLoggedIn = req.cookies.isLoggedIn === 'true'
+    next()
+})
 
 app.use(userRoute)
 app.use(authRouter)

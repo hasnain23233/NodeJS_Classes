@@ -6,6 +6,6 @@ exports.getLogin = (req, res, next) => {
 
 exports.postLogin = (req, res, next) => {
     console.log(req.body)
-    req.isLoggedIn = true
+    res.cookie('isLoggedIn', true)
     res.redirect('/')
 }
