@@ -7,6 +7,7 @@ const path = require('path')
 const { default: mongoose } = require('mongoose')
 require('dotenv').config()
 const session = require('express-session')
+const MongoDBStore = require('connect-mongodb-session')(session)
 
 // Import routes
 const userRoute = require('./routes/user/app')
@@ -29,6 +30,13 @@ app.use(express.static(path.join(pathUtils, 'public')))
 app.set('view engine', 'ejs')
 app.set('views', path.join(pathUtils, 'views'))
 
+
+//creating store 
+const sessionStore = new MongoDBStore({
+    uri: mongoLink,
+    collection: 'session'
+})
+
 // Middleware for logging requests
 app.use((req, res, next) => {
     console.log(req.url, req.method)
@@ -43,7 +51,8 @@ app.use(cookieParser())
 app.use(session({
     secret: "Doroing.com",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: sessionStore
 }))
 
 // Middleware to check login status from cookie
