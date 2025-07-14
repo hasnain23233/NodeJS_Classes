@@ -11,6 +11,7 @@ const authRouter = require('./routes/auth/login')
 require('dotenv').config()
 const cookieParser = require('cookie-parser')
 const session = require('express-session')
+const sessionConnectMongoURL = require('connect-mongodb-session')(session)
 
 const mongoLink = process.env.class34_mongoDB
 const app = express()
@@ -21,20 +22,26 @@ app.use(express.static(path.join(pathUtils, 'public')))
 app.set('view engine', 'ejs')
 app.set('views', path.join(pathUtils, 'views'))
 
+const sessionStore = new sessionConnectMongoURL({
+    uri: mongoLink,
+    collection: 'session'
+})
+
 app.use('/', (req, res, next) => {
     console.log(req.url, req.method)
     next()
 })
 app.use(bodyParser.urlencoded())
 app.use(cookieParser())
+
 app.use(session({
     secret: "Hasnainisawebdeveloper",
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    store: sessionStore
 }))
 app.use((req, res, next) => {
-    console.log(req.cookies)
-    req.isLoggedIn = req.cookies.isLoggedIn === 'true'
+    req.isLoggedIn = req.session.isLoggedIn === true
     next()
 })
 
