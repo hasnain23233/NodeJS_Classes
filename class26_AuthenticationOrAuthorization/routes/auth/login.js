@@ -7,5 +7,6 @@ authRouter.get('/signup', authController.getSignUp)
 
 authRouter.post('/login', authController.postLogin)
 authRouter.post('/logout', authController.postLogout)
+authRouter.post('/signup', authController.postsignup)
 
 module.exports = authRouter

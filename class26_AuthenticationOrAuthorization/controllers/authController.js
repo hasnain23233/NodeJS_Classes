@@ -17,3 +17,7 @@ exports.postLogout = (req, res, next) => {
         res.redirect('/login')
     })
 }
+exports.postsignup = (req, res, next) => {
+    console.log(req.body)
+    res.redirect('/login')
+}
