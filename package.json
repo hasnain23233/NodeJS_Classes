@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "tailwind": "npx tailwindcss -i Practice25_Cookies_session/views/input.css -o Practice25_Cookies_session/public/output.css --watch",
+    "tailwind": "npx tailwindcss -i class26_AuthenticationOrAuthorization/views/input.css -o class26_AuthenticationOrAuthorization/public/output.css --watch",
     "start": "npm run tailwind"
   },
   "dependencies": {
