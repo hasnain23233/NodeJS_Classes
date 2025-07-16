@@ -1,0 +1,32 @@
+<!-- Header -->
+<header class="bg-white shadow-sm py-4 px-6 flex gap-20 items-center justify-between">
+  <!-- Navigation Links -->
+  <nav class="flex items-center gap-6 ml-60 flex-wrap">
+    <a href="/" class="text-gray-700 hover:text-red-500 font-medium transition duration-300 text-base flex items-center gap-1">
+      🏠<div>
+      <h1 class="text-2xl font-extrabold text-red-500">Airbnb Clone</h1>
+      <p class="text-sm text-gray-500">Find your next stay with us</p>
+    </div>
+    </a>
+    <% if(isLoggedIn) { %>
+    <a href="/homes" class="text-gray-700 hover:text-red-500 font-medium transition duration-300 text-base">homes</a>
+      <a href="/favourites" class="text-gray-700 hover:text-red-500 font-medium transition duration-300 text-base">Favourites List</a>
+        <a href="/booking" class="text-gray-700 hover:text-red-500 font-medium transition duration-300 text-base">Booking</a>
+        <a href="/host_home_List" class="text-gray-700 hover:text-red-500 font-medium transition duration-300 text-base">host home list</a>
+        <a href="/add_home" class="bg-red-500 text-white px-5 py-2 rounded-full hover:bg-red-600 transition duration-300 font-semibold shadow-sm flex items-center gap-2">
+          ➕ <span>Add Home</span>
+        </a>
+    <% } %>
+    <% if(!isLoggedIn) { %>
+    <a href="/login" class="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-red-600 transition duration-300 font-semibold shadow-sm flex items-center gap-2">
+      <span>Login</span>
+    </a>
+     <% } else {%>
+        <form action="/logout" method="post">
+          <button type="submit" class="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-red-600 transition duration-300 font-semibold shadow-sm flex items-center gap-2">
+            <span>logout</span>
+          </button>
+        </form>
+       <% } %>
+  </nav>
+</header>
