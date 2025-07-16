@@ -87,7 +87,7 @@ mongoose.connect(mongoLink)
     .then(() => {
         console.log('✅ Successfully connected to the database')
         app.listen(4200, () => {
-            console.log('🚀 Server is running at http://localhost:4200')
+            console.log('🚀 Server is running at http://localhost:4200 Authentication')
         })
     })
     .catch((err) => {
