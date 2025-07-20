@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "tailwind": "npx tailwindcss -i Practice26_AuthenticationOrAuthorization/views/input.css -o Practice26_AuthenticationOrAuthorization/public/output.css --watch",
+    "tailwind": "npx tailwindcss -i class26_AuthenticationOrAuthorization/views/input.css -o class26_AuthenticationOrAuthorization/public/output.css --watch",
     "start": "npm run tailwind"
   },
   "dependencies": {
@@ -11,6 +11,7 @@
     "ejs": "^3.1.10",
     "express": "^5.1.0",
     "express-session": "^1.18.1",
+    "express-validator": "^7.2.1",
     "mongodb": "^6.17.0",
     "mongoose": "^8.16.2",
     "mysql2": "^3.14.1"
