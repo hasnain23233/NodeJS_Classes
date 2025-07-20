@@ -1,4 +1,4 @@
-const { check } = require("express-validator")
+const { check, validationResult } = require("express-validator")
 
 exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
@@ -23,56 +23,66 @@ exports.postsignup = [
     check('firstName')
         .trim()
         .isLength({ min: 2 })
-        .withMessage('Your first name at lest 2 chractors ')
-        .matches(/^[A-Za-z\s]+S/)
-        .withMessage('First Name should only alphabets')
-    ,
+        .withMessage('Your first name must be at least 2 characters long')
+        .matches(/^[A-Za-z\s]+$/)
+        .withMessage('First name should contain only alphabets'),
+
     check('lastName')
-        .matches(/^[A-Za-z\s]+S/)
-        .withMessage('Last Name should only alphabets')
-    ,
+        .optional({ checkFalsy: true }) // If you want to allow empty last name
+        .matches(/^[A-Za-z\s]*$/)
+        .withMessage('Last name should contain only alphabets'),
+
     check('email')
         .isEmail()
-        .withMessage('Please Enter a valid email')
-        .normalizeEmail()
-    ,
+        .withMessage('Please enter a valid email')
+        .normalizeEmail(),
+
     check('password')
         .isLength({ min: 8 })
-        .withMessage('Your Pasword at lest 8 charactores')
+        .withMessage('Your password must be at least 8 characters long')
         .matches(/[a-z]/)
-        .withMessage('Your Password Should Lowercase Alphabets')
+        .withMessage('Password must contain at least one lowercase letter')
         .matches(/[A-Z]/)
-        .withMessage('Your Password Should Uppercase Alphabets')
+        .withMessage('Password must contain at least one uppercase letter')
         .matches(/[!@#$%^&*(),.?":{}|<>]/)
-        .withMessage('Your password must contain at least one special character')
-    ,
+        .withMessage('Password must contain at least one special character'),
+
     check('confirmPassword')
         .trim()
         .custom((value, { req }) => {
             if (value !== req.body.password) {
-                throw new Error('Password does not match')
+                throw new Error('Passwords do not match');
             }
-            return true
-        })
-    ,
+            return true;
+        }),
+
     check('userType')
-        .isEmpty()
-        .withMessage('use type was empty')
+        .notEmpty()
+        .withMessage('User type was empty')
         .isIn(['guest', 'host'])
-        .withMessage('Invalid user type')
-    ,
+        .withMessage('Invalid user type'),
+
     check('agree')
-        .isEmpty()
+        .notEmpty()
         .withMessage('Please accept the terms and conditions')
-        .custom((value, { req }) => {
+        .custom((value) => {
             if (value !== 'on') {
-                throw new Error('Please accept the terms and conditions')
+                throw new Error('Please accept the terms and conditions');
             }
-            return true
-        })
-    ,
+            return true;
+        }),
+
     (req, res, next) => {
-        console.log(req.body)
-        res.redirect('/login')
+        const { firstName, lastName, email, password, userType } = req.body;
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).render('auth/signup', {
+                isLoggedIn: false,
+                errors: errors.array().map(err => err.msg),
+                oldPut: { firstName, lastName, email, password, userType }
+            });
+        }
+
+        res.redirect('/login');
     }
-]
+];
