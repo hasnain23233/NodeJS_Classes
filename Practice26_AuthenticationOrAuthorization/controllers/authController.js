@@ -4,13 +4,13 @@ const UserAuth = require("../models/UserAuth")
 exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
         isLoggedIn: false,
-        errors: [],
-        oldPut: {}
     })
 }
 exports.getSignup = (req, res, next) => {
     res.render('auth/signup', {
-        isLoggedIn: false
+        isLoggedIn: false,
+        errors: [],
+        oldPut: {}
     })
 }
 exports.postLogin = (req, res, next) => {
@@ -79,16 +79,16 @@ exports.postSignup = [
     ,
 
     (req, res, next) => {
-        const { firstName, lastName, email, userType } = req.body;
+        const { firstName, lastName, email, password, userType } = req.body;
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             return res.status(422).render('auth/signup', {
                 isLoggedIn: false,
                 errors: errors.array().map(err => err.msg),
-                oldPut: { firstName, lastName, email, userType }
+                oldPut: { firstName, lastName, email, password, userType }
             });
         }
-        const user = new UserAuth({ firstName, lastName, email, userType })
+        const user = new UserAuth({ firstName, lastName, email, password, userType })
         user.save().then(() => {
             res.redirect('/login')
         }).catch((err) => {
@@ -96,7 +96,7 @@ exports.postSignup = [
             return res.status(422).render('auth/signup', {
                 isLoggedIn: false,
                 errors: [err.message],
-                oldPut: { firstName, lastName, email, userType }
+                oldPut: { firstName, lastName, email, password, userType }
             });
         })
     }

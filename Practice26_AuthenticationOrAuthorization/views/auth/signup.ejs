@@ -9,7 +9,7 @@
 <body class="bg-gray-100 font-sans">
     <%- include('./../Partials/Header.ejs') %>
   <div class="max-w-md mx-auto mt-10 bg-white p-6 rounded-lg shadow-md">
-    <h2 class="text-2xl font-bold mb-4 text-center">Sign Up to Airbnb</h2>
+    <h2 class="text-2xl font-bold mb-4 text-center">Sign Up to Airbnb</h2> 
 
      <% if (typeof errors !== 'undefined' && errors.length > 0) { %>
       <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mb-4" role="alert">
@@ -69,7 +69,7 @@
 
       <!-- Agree to Terms (checkbox) -->
       <div class="flex items-center">
-        <input type="checkbox" name="agree" value="true" required class="mr-2">
+        <input type="checkbox" name="agree"  required class="mr-2">
         <label class="text-gray-700 text-sm">I agree to the Terms and Conditions *</label>
       </div>
 
