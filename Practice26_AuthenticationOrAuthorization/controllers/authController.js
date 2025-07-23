@@ -1,5 +1,6 @@
 const { check, validationResult } = require("express-validator")
 const UserAuth = require("../models/UserAuth")
+const bcryptjs = require('bcryptjs')
 
 exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
@@ -88,8 +89,11 @@ exports.postSignup = [
                 oldPut: { firstName, lastName, email, password, userType }
             });
         }
-        const user = new UserAuth({ firstName, lastName, email, password, userType })
-        user.save().then(() => {
+
+        bcryptjs.hash(password, 12).then(hashedPassword => {
+            const user = new UserAuth({ firstName, lastName, email, password: hashedPassword, userType })
+            return user.save()
+        }).then(() => {
             res.redirect('/login')
         }).catch((err) => {
             console.log('user was not save ', err.message)
