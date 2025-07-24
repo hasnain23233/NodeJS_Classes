@@ -4,7 +4,9 @@ const bcrypt = require('bcryptjs')
 
 exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
-        isLoggedIn: false
+        isLoggedIn: false,
+        errors: [],
+        oldPut: {}
     })
 }
 exports.getSignUp = (req, res, next) => {
@@ -14,7 +16,17 @@ exports.getSignUp = (req, res, next) => {
         oldPut: {}
     })
 }
-exports.postLogin = (req, res, next) => {
+exports.postLogin = async (req, res, next) => {
+    console.log(req.body)
+    const { email, password } = req.body
+    const user = await AuthUser.findOne({ email })
+    if (!user) {
+        return res.status(422).render('auth/login', {
+            isLoggedIn: false,
+            errors: ['Invalid email or password'],
+            oldPut: { email }
+        });
+    }
     req.session.isLoggedIn = true
     res.redirect('/')
 }
