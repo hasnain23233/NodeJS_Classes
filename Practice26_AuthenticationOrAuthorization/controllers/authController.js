@@ -19,6 +19,7 @@ exports.getSignup = (req, res, next) => {
 exports.postLogin = async (req, res, next) => {
     const { email, password } = req.body
     const user = await UserAuth.findOne({ email })
+    console.log(req.body)
     if (!user) {
         return res.status(422).render('auth/login', {
             isLoggedIn: false,
@@ -26,6 +27,17 @@ exports.postLogin = async (req, res, next) => {
             oldPut: { email }
         });
     }
+
+    const isMetched = await bcryptjs.compare(password, user.password)
+    if (!isMetched) {
+        return res.status(422).render('auth/login', {
+            isLoggedIn: false,
+            errors: ['Invalid Email or Password'],
+            oldPut: { email }
+        });
+    }
+
+
     req.session.isLoggedIn = true
     res.redirect('/')
 }
