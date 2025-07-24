@@ -27,7 +27,19 @@ exports.postLogin = async (req, res, next) => {
             oldPut: { email }
         });
     }
+
+    const isMatch = await bcrypt.compare(password, user.password)
+
+    if (!isMatch) {
+        return res.status(422).render('auth/login', {
+            isLoggedIn: false,
+            errors: ['Invalid email or password'],
+            oldPut: { email }
+        });
+    }
+
     req.session.isLoggedIn = true
+    req.session.user = user
     res.redirect('/')
 }
 exports.postLogout = (req, res, next) => {
