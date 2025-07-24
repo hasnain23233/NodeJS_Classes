@@ -10,10 +10,10 @@
 <body>
   <%- include('./../Partials/Header.ejs') %>
   <br><br> <br>
-<div  class="flex items-center justify-center mt-[200] bg-gradient-to-br from-blue-100 to-indigo-200">
+<div  class="flex items-center justify-center mt-[200]">
 
   <div class="bg-white shadow-2xl rounded-2xl p-8 w-full max-w-md">
-    <h2 class="text-3xl font-bold text-center text-indigo-600 mb-6">Login airbnd</h2>
+    <h2 class="text-3xl font-bold text-center ">Login airbnd</h2>
     <%- include('./../Partials/ErrorShowing.ejs') %>
 
     <form class="space-y-5" action="/login" method="post">
@@ -53,11 +53,7 @@
           Log In
         </button>
       </div>
-      
-    <!-- Extra Links -->
-    <p class="mt-4 text-sm text-center text-gray-600">
-    <button type="submit" class="inline-block m-auto px-6 py-3 bg-yellow-500 text-white rounded-full hover:bg-yellow-600 transition">Submit</button>
-    </p>
+        
     </form>
 
 
