@@ -6,7 +6,8 @@ exports.getIndex = (req, res, next) => {
     Home.find().then((data) => {
         res.render('store/index', {
             HomeData: data,
-            isLoggedIn: req.isLoggedIn
+            isLoggedIn: req.isLoggedIn,
+            user: req.session.user
         })
     }).catch((error) => {
         console.log('we can`t connect to database', error)
@@ -16,7 +17,8 @@ exports.getHomeList = (req, res, next) => {
     Home.find().then(data => {
         res.render('store/homeList', {
             HomeData: data,
-            isLoggedIn: req.isLoggedIn
+            isLoggedIn: req.isLoggedIn,
+            user: req.session.user
         })
     }).catch((error) => {
         console.log('we can`t connect to database', error)
@@ -24,7 +26,8 @@ exports.getHomeList = (req, res, next) => {
 }
 exports.getBooking = (req, res, next) => {
     res.render('store/booking', {
-        isLoggedIn: req.isLoggedIn
+        isLoggedIn: req.isLoggedIn,
+        user: req.session.user
     })
 }
 
@@ -33,7 +36,8 @@ exports.getfavourites = (req, res, next) => {
         const fvtHomes = favIds.map(fav => fav.houseID)
         res.render('store/favourites', {
             fvtHomes: fvtHomes,
-            isLoggedIn: req.isLoggedIn
+            isLoggedIn: req.isLoggedIn,
+            user: req.session.user
         });
     });
 };
@@ -86,7 +90,8 @@ exports.getHomeDetails = (req, res, next) => {
 
             res.render('store/homeDetails', {
                 homeDetail: home,
-                isLoggedIn: req.isLoggedIn
+                isLoggedIn: req.isLoggedIn,
+                user: req.session.user
             })
         }
     })

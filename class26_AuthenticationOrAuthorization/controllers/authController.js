@@ -6,14 +6,16 @@ exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
         isLoggedIn: false,
         errors: [],
-        oldPut: {}
+        oldPut: { email: "" },
+        user: {}
     })
 }
 exports.getSignUp = (req, res, next) => {
     res.render('auth/signup', {
         isLoggedIn: false,
         errors: [],
-        oldPut: {}
+        oldPut: { firstName: '', lastName: '', email: '', password: '', userType: '' },
+        user: {}
     })
 }
 exports.postLogin = async (req, res, next) => {
@@ -24,7 +26,9 @@ exports.postLogin = async (req, res, next) => {
         return res.status(422).render('auth/login', {
             isLoggedIn: false,
             errors: ['Invalid email or password'],
-            oldPut: { email }
+            oldPut: { email },
+            user: {}
+
         });
     }
 
@@ -34,12 +38,14 @@ exports.postLogin = async (req, res, next) => {
         return res.status(422).render('auth/login', {
             isLoggedIn: false,
             errors: ['Invalid email or password'],
-            oldPut: { email }
+            oldPut: { email },
+            user: {}
         });
     }
 
     req.session.isLoggedIn = true
     req.session.user = user
+    await req.session.save()
     res.redirect('/')
 }
 exports.postLogout = (req, res, next) => {
@@ -107,7 +113,8 @@ exports.postsignup = [
             return res.status(422).render('auth/signup', {
                 isLoggedIn: false,
                 errors: errors.array().map(err => err.msg),
-                oldPut: { firstName, lastName, email, password, userType }
+                oldPut: { firstName, lastName, email, password, userType },
+                user: {}
             });
         }
 
@@ -121,7 +128,8 @@ exports.postsignup = [
             return res.status(422).render('auth/signup', {
                 isLoggedIn: false,
                 errors: [err.message],
-                oldPut: { firstName, lastName, email, password, userType }
+                oldPut: { firstName, lastName, email, password, userType },
+                user: {}
             });
         })
 
