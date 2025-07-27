@@ -1,5 +1,5 @@
-const favourites = require('../models/favourites')
 const Home = require('../models/HomeData')
+const User = require('../models/UserAuth')
 
 exports.getIndex = (req, res, next) => {
     console.log('session value is ', req.session)
@@ -31,50 +31,44 @@ exports.getBooking = (req, res, next) => {
     })
 }
 
-exports.getfavourites = (req, res, next) => {
-    favourites.find().populate('houseID').then(favIds => {
-        const fvtHomes = favIds.map(fav => fav.houseID)
-        res.render('store/favourites', {
-            fvtHomes: fvtHomes,
-            isLoggedIn: req.isLoggedIn,
-            user: req.session.user
-        });
+
+
+exports.getfavourites = async (req, res, next) => {
+    const userId = req.session.user._id
+    const userData = await User.findOne(userId).populate('favourites')
+    res.render('store/favourites', {
+        fvtHomes: userData.favourites,
+        isLoggedIn: req.isLoggedIn,
+        user: req.session.user
     });
 };
 
 
 
-exports.postAddFvt = (req, res, next) => {
+exports.postAddFvt = async (req, res, next) => {
     const homeid = req.body.id
-    favourites.findOne({ houseID: homeid }).then((fav) => {
-        if (fav) {
-            console.log('Already Fvt marked')
-        } else {
-            fav = new favourites({ houseID: homeid })
-            fav.save()
-                .then((result) => {
-                    console.log("✅ fvt added ", result.insertedId);
-                })
-                .catch((error) => {
-                    console.log("❌ We can`t add the fvt ", error.message);
-                })
-        }
-        res.redirect('/favourites');
-    })
+    const userId = req.session.user._id
+
+    const user = await User.findOne(userId)
+    if (!user.favourites.includes(homeid)) {
+        user.favourites.push(homeid)
+        await user.save()
+    }
+    res.redirect('/favourites');
 
 }
 
-exports.postRemoveForFavroit = (req, res, next) => {
+exports.postRemoveForFavroit = async (req, res, next) => {
     const homeId = req.params.homeId
-    favourites.findOneAndDelete({ houseID: homeId }).then((result) => {
-        console.log("✅ fvt remove ", result.insertedId);
-    })
-        .catch((error) => {
-            console.log("❌ We can`t remove the fvt ", error.message);
-        })
-        .finally(() => {
-            res.redirect('/favourites');
-        });
+    const userId = req.session.user._id
+
+    const user = await User.findOne(userId)
+
+    if (user.favourites.includes(homeId)) {
+        user.favourites = user.favourites.filter(fav => fav != homeId)
+        await user.save()
+    }
+    res.redirect('/favourites');
 }
 
 
