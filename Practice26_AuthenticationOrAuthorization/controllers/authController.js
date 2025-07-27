@@ -6,14 +6,17 @@ exports.getLogin = (req, res, next) => {
     res.render('auth/login', {
         isLoggedIn: false,
         errors: [],
-        oldPut: {}
+        oldPut: {},
+        user: {}
+
     })
 }
 exports.getSignup = (req, res, next) => {
     res.render('auth/signup', {
         isLoggedIn: false,
         errors: [],
-        oldPut: {}
+        oldPut: {},
+        user: {}
     })
 }
 exports.postLogin = async (req, res, next) => {
@@ -24,7 +27,8 @@ exports.postLogin = async (req, res, next) => {
         return res.status(422).render('auth/login', {
             isLoggedIn: false,
             errors: ['Invalid Email or Password'],
-            oldPut: { email }
+            oldPut: { email },
+            user: {}
         });
     }
 
@@ -33,7 +37,8 @@ exports.postLogin = async (req, res, next) => {
         return res.status(422).render('auth/login', {
             isLoggedIn: false,
             errors: ['Invalid Email or Password'],
-            oldPut: { email }
+            oldPut: { email },
+            user: {}
         });
     }
 
@@ -111,7 +116,8 @@ exports.postSignup = [
             return res.status(422).render('auth/signup', {
                 isLoggedIn: false,
                 errors: errors.array().map(err => err.msg),
-                oldPut: { firstName, lastName, email, password, userType }
+                oldPut: { firstName, lastName, email, password, userType },
+                user: {}
             });
         }
 
@@ -125,7 +131,8 @@ exports.postSignup = [
             return res.status(422).render('auth/signup', {
                 isLoggedIn: false,
                 errors: [err.message],
-                oldPut: { firstName, lastName, email, password, userType }
+                oldPut: { firstName, lastName, email, password, userType },
+                user: {}
             });
         })
     }

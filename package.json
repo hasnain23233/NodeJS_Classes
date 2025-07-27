@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "tailwind": "npx tailwindcss -i class26_AuthenticationOrAuthorization/views/input.css -o class26_AuthenticationOrAuthorization/public/output.css --watch",
+    "tailwind": "npx tailwindcss -i Practice26_AuthenticationOrAuthorization/views/input.css -o Practice26_AuthenticationOrAuthorization/public/output.css --watch",
     "start": "npm run tailwind"
   },
   "dependencies": {

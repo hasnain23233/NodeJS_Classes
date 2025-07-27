@@ -3,7 +3,8 @@ exports.getsHome = (req, res, next) => {
     res.render('host/editHome', {
         title: "Register Your Home",
         editing: false,
-        isLoggedIn: req.isLoggedIn
+        isLoggedIn: req.isLoggedIn,
+        user: req.session.user
     })
 }
 
@@ -22,7 +23,8 @@ exports.getEditHome = (req, res, next) => {
             home: home,
             editing: queryEditing,
             title: "Edit Your Home",
-            isLoggedIn: req.isLoggedIn
+            isLoggedIn: req.isLoggedIn,
+            user: req.session.user
         })
     })
 }
@@ -31,7 +33,8 @@ exports.gethostHomeList = (req, res, next) => {
     Home.find().then((data) => {
         res.render('host/hostHomeList', {
             HomeData: data,
-            isLoggedIn: req.isLoggedIn
+            isLoggedIn: req.isLoggedIn,
+            user: req.session.user
         })
     })
 }
@@ -46,7 +49,8 @@ exports.postAddHome = (req, res, next) => {
     const sucessReqister = { name, email, home, description };
     res.render('host/Success', {
         sucessReqister,
-        isLoggedIn: req.isLoggedIn
+        isLoggedIn: req.isLoggedIn,
+        user: req.session.user
     });
 };
 

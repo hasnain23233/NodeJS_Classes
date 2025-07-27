@@ -9,13 +9,17 @@
     </div>
     </a>
     <% if(isLoggedIn) { %>
-    <a href="/homes" class="text-gray-700 hover:text-red-500 font-medium transition duration-300 text-base">homes</a>
-      <a href="/favourites" class="text-gray-700 hover:text-red-500 font-medium transition duration-300 text-base">Favourites List</a>
-        <a href="/booking" class="text-gray-700 hover:text-red-500 font-medium transition duration-300 text-base">Booking</a>
-        <a href="/host_home_List" class="text-gray-700 hover:text-red-500 font-medium transition duration-300 text-base">host home list</a>
-        <a href="/add_home" class="bg-red-500 text-white px-5 py-2 rounded-full hover:bg-red-600 transition duration-300 font-semibold shadow-sm flex items-center gap-2">
-          ➕ <span>Add Home</span>
-        </a>
+    <% if(user && user.userType === "guest") { %>
+          <a href="/homes" class="text-gray-700 hover:text-red-500 font-medium transition duration-300 text-base">homes</a>
+            <a href="/favourites" class="text-gray-700 hover:text-red-500 font-medium transition duration-300 text-base">Favourites List</a>
+              <a href="/booking" class="text-gray-700 hover:text-red-500 font-medium transition duration-300 text-base">Booking</a>
+
+        <% } else {%>
+          <a href="/host_home_List" class="text-gray-700 hover:text-red-500 font-medium transition duration-300 text-base">host home list</a>
+          <a href="/add_home" class="bg-red-500 text-white px-5 py-2 rounded-full hover:bg-red-600 transition duration-300 font-semibold shadow-sm flex items-center gap-2">
+            ➕ <span>Add Home</span>
+          </a>
+         <% } %>
     <% } %>
     <% if(!isLoggedIn) { %>
       <a href="/signup" class="bg-blue-500 text-white px-5 py-2 rounded-full hover:bg-red-600 transition duration-300 font-semibold shadow-sm flex items-center gap-2">
