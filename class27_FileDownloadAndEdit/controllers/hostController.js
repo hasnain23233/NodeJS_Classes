@@ -41,8 +41,8 @@ exports.gethostHomeList = (req, res, next) => {
 
 // Add New Home
 exports.postAddHome = (req, res, next) => {
-    const { name, email, home, img, description } = req.body;
-    const Homedata = new Home({ name, email, home, img, description }); // ✅ Fix here
+    const { name, email, home, photo, description } = req.body;
+    const Homedata = new Home({ name, email, home, photo, description }); // ✅ Fix here
     Homedata.save().then(() => {
         console.log('save the homes')
     });
@@ -56,12 +56,12 @@ exports.postAddHome = (req, res, next) => {
 
 // Edit Existing Home
 exports.postEditHome = (req, res, next) => {
-    const { id, name, email, home, img, description } = req.body;
+    const { id, name, email, home, photo, description } = req.body;
     Home.findById(id).then((homes) => {
         homes.name = name
         homes.email = email
         homes.home = home
-        homes.img = img
+        homes.photo = photo
         homes.description = description
         homes.save().then(() => {
             console.log("home was edit ")
