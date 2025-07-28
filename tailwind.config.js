@@ -1,6 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ['./Practice26_AuthenticationOrAuthorization/views/**/*.ejs'],
+  content: ['./class27_FileDownloadAndEdit/views/**/*.ejs'],
   theme: {
     extend: {},
   },
