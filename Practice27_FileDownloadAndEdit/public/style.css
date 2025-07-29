@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: rgb(190, 207, 250);
+    background-color: lightslategray;
+    padding: 10%;
+}
+
+a {
+    box-shadow: 2px 2px 12px black;
+    padding: 20px;
+    position: absolute;
+    top: 60%;
+    left: 30%;
+    color: white;
+    border-radius: 12px;
+    background-color: blue;
+
+}
