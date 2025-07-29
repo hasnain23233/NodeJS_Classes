@@ -42,6 +42,7 @@ exports.gethostHomeList = (req, res, next) => {
 // Add New Home
 exports.postAddHome = (req, res, next) => {
     const { name, email, home, photo, description } = req.body;
+    console.log(req.body)
     const Homedata = new Home({ name, email, home, photo, description }); // ✅ Fix here
     Homedata.save().then(() => {
         console.log('save the homes')

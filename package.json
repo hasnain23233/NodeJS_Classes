@@ -15,6 +15,7 @@
     "express-validator": "^7.2.1",
     "mongodb": "^6.17.0",
     "mongoose": "^8.16.2",
+    "multer": "^2.0.2",
     "mysql2": "^3.14.1"
   },
   "devDependencies": {

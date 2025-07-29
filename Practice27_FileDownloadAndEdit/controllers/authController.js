@@ -19,7 +19,6 @@ exports.getSignUp = (req, res, next) => {
     })
 }
 exports.postLogin = async (req, res, next) => {
-    console.log(req.body)
     const { email, password } = req.body
     const user = await AuthUser.findOne({ email })
     if (!user) {
