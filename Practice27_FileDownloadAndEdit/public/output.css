@@ -524,7 +524,7 @@ Make sure disabled buttons don't get the pointer cursor.
    This can trigger a poorly considered lint error in some tools but is included by design.
 */
 
-img,
+photo,
 svg,
 video,
 canvas,
@@ -542,7 +542,7 @@ object {
 Constrain images and videos to the parent width and preserve their intrinsic aspect ratio. (https://github.com/mozdevs/cssremedy/issues/14)
 */
 
-img,
+photo,
 video {
   max-width: 100%;
   height: auto;

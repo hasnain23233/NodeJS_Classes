@@ -4,7 +4,7 @@ const homeSchema = new mongoose.Schema({
     name: { type: String, require: true },
     email: { type: String, require: true },
     home: { type: String, require: true },
-    img: { type: String, require: true },
+    photo: { type: String, require: true },
     description: { type: String, require: true },
 })
 
