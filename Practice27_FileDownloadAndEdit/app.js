@@ -8,6 +8,7 @@ const { default: mongoose } = require('mongoose')
 require('dotenv').config()
 const session = require('express-session')
 const MongoDBStore = require('connect-mongodb-session')(session)
+const multer = require('multer')
 
 // Import routes
 const userRoute = require('./routes/user/app')
@@ -22,8 +23,12 @@ const Error = require('./controllers/Error')
 const mongoLink = process.env.class34_mongoDB
 
 const app = express()
+const multerStorage = {
+    dest: './Practice27_FileDownloadAndEdit/upload/'
+}
 
 // Serve static files
+app.use(multer(multerStorage).single('photo'))
 app.use(express.static(path.join(pathUtils, 'public')))
 
 // Set view engine
