@@ -30,6 +30,7 @@ exports.getEditHome = (req, res, next) => {
 }
 
 exports.gethostHomeList = (req, res, next) => {
+    console.log(req.body)
     Home.find().then((data) => {
         res.render('host/hostHomeList', {
             HomeData: data,
@@ -43,6 +44,8 @@ exports.gethostHomeList = (req, res, next) => {
 exports.postAddHome = (req, res, next) => {
     const { name, email, home, photo, description } = req.body;
     const Homedata = new Home({ name, email, home, photo, description }); // ✅ Fix here
+    console.log(name, email, home, photo, description)
+    console.log(req.file)
     Homedata.save().then(() => {
         console.log('save the homes')
     });

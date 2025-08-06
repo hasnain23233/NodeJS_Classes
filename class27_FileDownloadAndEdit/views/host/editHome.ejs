@@ -15,7 +15,7 @@
         <%= title %>
       </h1>
       
-      <form action="/<%= editing ? 'host/edit-home' : 'add_home' %>" method="post" class="space-y-4">
+      <form action="/<%= editing ? 'host/edit-home' : 'add_home' %>" method="post" class="space-y-4" enctype="multipart/form-data">
 
         <input type="hidden" id="name" name="id" value="<%= editing ? home._id : ''%>" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-red-500 focus:border-red-500"/>
 
