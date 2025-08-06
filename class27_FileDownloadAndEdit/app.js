@@ -24,12 +24,15 @@ const mongoLink = process.env.class34_mongoDB
 
 const app = express()
 
-// Serve static files
-app.use(multer().single('photo'))
-app.use(express.static(path.join(pathUtils, 'public')))
+//multer storage
+const multerOption = {
+    dest: './class27_FileDownloadAndEdit/upload/'
+}
 
 // Set view engine
 app.set('view engine', 'ejs')
+app.use(multer(multerOption).single('photo'))
+app.use(express.static(path.join(pathUtils, 'public')))
 app.set('views', path.join(pathUtils, 'views'))
 
 
