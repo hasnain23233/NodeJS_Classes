@@ -1,7 +1,7 @@
 {
     "watch": ["."],
     "ext": "js,json,ejs",
-    "ignore": ["node_modules", "Practice27_FileDownloadAndEdit/HomeData/"],
-    "exec": "node ./Practice27_FileDownloadAndEdit/app.js"
+    "ignore": ["node_modules", "class27_FileDownloadAndEdit/HomeData/"],
+    "exec": "node ./class27_FileDownloadAndEdit/app.js"
   }
   

@@ -42,9 +42,16 @@ const storage = multer.diskStorage({
         cb(null, randomString(10) + '-' + file.originalname);
     }
 });
+const fileFilter = (req, file, cb) => {
+    if (['image/jpeg', 'image/png', 'image/jpg'].includes(file.mimetype)) {
+        cb(null, true)
+    } else {
+        cb(null, false)
+    }
+}
 
 const multerOption = {
-    storage
+    storage, fileFilter
 };
 
 // Set view engine
