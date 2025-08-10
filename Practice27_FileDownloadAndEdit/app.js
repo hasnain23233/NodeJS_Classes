@@ -24,9 +24,28 @@ const mongoLink = process.env.class34_mongoDB
 
 const app = express()
 
-const multerStorage = {
-    dest: './Practice27_FileDownloadAndEdit/upload/'
-}
+const randomString = (length) => {
+    const characters = "abcdefghijklmnopqrstuvwxyz";
+    let result = '';
+
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+};
+
+// ✅ Correct multer storage config
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './Practice27_FileDownloadAndEdit/upload/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, randomString(10) + '-' + file.originalname);
+    }
+});
+
+// ✅ Create multer instance
+const multerStorage = multer({ storage: storage });
 
 // Serve static files
 app.use(multer(multerStorage).single('photo'))
@@ -93,7 +112,7 @@ mongoose.connect(mongoLink)
     .then(() => {
         console.log('✅ Successfully connected to the database')
         app.listen(4200, () => {
-            console.log('🚀 Server is running at http://localhost:4200 authentication')
+            console.log('🚀 Server is running at http://localhost:4200 file uplaoding and downloading practice class')
         })
     })
     .catch((err) => {
