@@ -41,8 +41,15 @@ exports.gethostHomeList = (req, res, next) => {
 
 // Add New Home
 exports.postAddHome = (req, res, next) => {
-    const { name, email, home, photo, description } = req.body;
-    console.log(req.body)
+    const { name, email, home, description } = req.body;
+    console.log(req.file)
+
+    if (!req.file) {
+        return res.status(422).send('No image provided')
+    }
+
+    const photo = req.file.path
+
     const Homedata = new Home({ name, email, home, photo, description }); // ✅ Fix here
     Homedata.save().then(() => {
         console.log('save the homes')

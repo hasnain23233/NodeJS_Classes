@@ -44,8 +44,17 @@ const storage = multer.diskStorage({
     }
 });
 
+const fileFilter = (req, file, cb) => {
+    if (['image/jpeg', 'image/png', 'image/jpg'].includes(file.mimetype)) {
+        cb(null, true)
+    } else {
+        cb(null, false)
+    }
+}
+
+
 // ✅ Create multer instance
-const multerStorage = multer({ storage: storage });
+const multerStorage = multer({ storage: storage, fileFilter: fileFilter });
 
 // Serve static files
 app.use(multer(multerStorage).single('photo'))
