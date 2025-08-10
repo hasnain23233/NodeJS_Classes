@@ -23,11 +23,29 @@ const Error = require('./controllers/Error')
 const mongoLink = process.env.class34_mongoDB
 
 const app = express()
+// Random string generator (lowercase letters only)
+const randomString = (length) => {
+    const characters = "abcdefghijklmnopqrstuvwxyz";
+    let result = '';
+    for (let i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+};
 
-//multer storage
+// Multer storage
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, './class27_FileDownloadAndEdit/upload/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, randomString(10) + '-' + file.originalname);
+    }
+});
+
 const multerOption = {
-    dest: './class27_FileDownloadAndEdit/upload/'
-}
+    storage
+};
 
 // Set view engine
 app.set('view engine', 'ejs')
