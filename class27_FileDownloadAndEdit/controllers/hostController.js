@@ -63,13 +63,16 @@ exports.postAddHome = (req, res, next) => {
 
 // Edit Existing Home
 exports.postEditHome = (req, res, next) => {
-    const { id, name, email, home, photo, description } = req.body;
+    const { id, name, email, home, description } = req.body;
+
     Home.findById(id).then((homes) => {
         homes.name = name
         homes.email = email
         homes.home = home
-        homes.photo = photo
         homes.description = description
+        if (req.file) {
+            home.photo = req.file.path
+        }
         homes.save().then(() => {
             console.log("home was edit ")
         });
