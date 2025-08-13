@@ -36,7 +36,7 @@ const randomString = (length) => {
 // Multer storage
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        cb(null, './class27_FileDownloadAndEdit/upload/');
+        cb(null, path.join(pathUtils, 'upload'));
     },
     filename: (req, file, cb) => {
         cb(null, randomString(10) + '-' + file.originalname);
@@ -58,6 +58,12 @@ const multerOption = {
 app.set('view engine', 'ejs')
 app.use(multer(multerOption).single('photo'))
 app.use(express.static(path.join(pathUtils, 'public')))
+console.log("pathUtils =>", pathUtils);
+app.use(
+    "/class27_FileDownloadAndEdit/upload",
+    express.static(path.join(pathUtils, "upload"))
+);
+
 app.set('views', path.join(pathUtils, 'views'))
 
 

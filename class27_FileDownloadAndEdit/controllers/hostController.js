@@ -47,12 +47,15 @@ exports.postAddHome = (req, res, next) => {
         return res.status(422).send('No image provided')
     }
 
-    const photo = req.file.path
+    // Convert file path to relative URL
+    const photo = '/class27_FileDownloadAndEdit/upload/' + req.file.filename;
+
     const Homedata = new Home({ name, email, home, photo, description });
     console.log(req.file)
     Homedata.save().then(() => {
         console.log('save the homes')
     });
+
     const sucessReqister = { name, email, home, description };
     res.render('host/Success', {
         sucessReqister,
@@ -60,6 +63,7 @@ exports.postAddHome = (req, res, next) => {
         user: req.session.user
     });
 };
+
 
 // Edit Existing Home
 exports.postEditHome = (req, res, next) => {
