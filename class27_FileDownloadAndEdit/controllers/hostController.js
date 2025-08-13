@@ -70,19 +70,25 @@ exports.postEditHome = (req, res, next) => {
     const { id, name, email, home, description } = req.body;
 
     Home.findById(id).then((homes) => {
-        homes.name = name
-        homes.email = email
-        homes.home = home
-        homes.description = description
+        homes.name = name;
+        homes.email = email;
+        homes.home = home;
+        homes.description = description;
+
         if (req.file) {
-            home.photo = req.file.path
+            // Store relative path for browser
+            homes.photo = '/class27_FileDownloadAndEdit/upload/' + req.file.filename;
         }
-        homes.save().then(() => {
-            console.log("home was edit ")
-        });
+
+        return homes.save();
+    }).then(() => {
+        console.log("✅ Home was edited");
         res.redirect('/host_home_List');
-    })
+    }).catch(err => {
+        console.error("❌ Error editing home:", err);
+    });
 };
+
 
 exports.postDeleteHome = (req, res, next) => {
     const homeId = req.params.homeId
